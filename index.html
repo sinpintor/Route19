@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>NOMADIC 368 — THE HUNTER</title>
+    <title>NOMADIC 368 — VOGUE COORDINATES</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,800&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -13,84 +13,85 @@
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; scroll-behavior: smooth; }
         
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
-        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 25vw; font-weight: 800; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; text-transform: uppercase; transition: 1.5s ease; white-space: nowrap; }
+        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 25vw; font-weight: 800; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; text-transform: uppercase; transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); white-space: nowrap; }
 
         .container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 80px 30px; box-sizing: border-box; text-align: center; }
 
         .subtitle { font-size: 0.6rem; letter-spacing: 0.8em; color: var(--grey); text-transform: uppercase; margin-bottom: 10px; }
-        .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3rem; font-weight: 800; margin: 0; color: var(--active-color); transition: color 0.8s; }
-        .stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.4em; color: var(--grey); margin-bottom: 20px; }
+        .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.2rem; font-weight: 800; margin: 0; color: var(--active-color); transition: color 1s; }
+        .stats { margin-top: 20px; font-size: 0.55rem; letter-spacing: 0.4em; color: var(--grey); margin-bottom: 20px; }
         
-        /* 置中大字舞台 */
-        .display-stage { width: 100%; max-width: 500px; height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .target-display { font-family: 'Noto Serif TC', serif; font-size: 3.5rem; font-weight: 600; color: var(--active-color); letter-spacing: 0.05em; transition: 0.3s; margin-bottom: 15px; }
-        .loc-display { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; letter-spacing: 0.5em; color: var(--white); text-transform: uppercase; opacity: 0.8; }
+        .display-stage { width: 100%; max-width: 500px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .loc-display { font-family: 'Noto Serif TC', serif; font-size: 3.5rem; font-weight: 600; color: var(--white); letter-spacing: 0.05em; margin-bottom: 15px; line-height: 1.2; transition: 0.3s; }
+        .target-display { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 0.5em; color: var(--active-color); text-transform: uppercase; font-weight: 600; }
 
-        .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 22px 60px; font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; cursor: pointer; transition: 0.5s; margin-top: 40px; }
-        .btn-vogue:hover { background: var(--white); color: var(--black); }
+        .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 22px 60px; font-size: 0.7rem; letter-spacing: 0.6em; text-transform: uppercase; cursor: pointer; transition: 0.5s; margin-top: 40px; }
+        .btn-vogue:hover { background: var(--white); color: var(--black); border-color: var(--white); }
 
-        /* 任務面板 */
-        .mission-panel { display: none; width: 100%; max-width: 450px; text-align: left; margin-top: 50px; animation: fadeIn 1s ease forwards; }
+        .mission-panel { display: none; width: 100%; max-width: 450px; text-align: left; margin-top: 60px; animation: fadeIn 1s ease forwards; }
         .mission-panel.active { display: block; }
-        .mission-label { font-size: 0.6rem; letter-spacing: 0.4em; color: var(--grey); display: block; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 8px; }
-        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.3rem; line-height: 1.8; color: #eee; }
+        .mission-label { font-size: 0.6rem; letter-spacing: 0.5em; color: var(--grey); display: block; margin-bottom: 15px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; text-transform: uppercase; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.35rem; line-height: 1.8; color: #eee; }
         
-        /* 檔案館 */
-        .archive-section { width: 100%; max-width: 450px; margin-top: 100px; text-align: left; border-top: 1px solid #1a1a1a; padding-top: 40px; }
-        .journal-item { padding: 30px 0; border-bottom: 1px solid #111; }
-        .j-meta { font-size: 0.5rem; letter-spacing: 0.2em; color: var(--grey); margin-bottom: 10px; }
-        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.35rem; font-weight: 500; margin-bottom: 8px; }
-        .j-target { font-family: 'Noto Serif TC', serif; font-size: 0.9rem; color: var(--active-color); }
+        .archive-section { width: 100%; max-width: 450px; margin-top: 120px; text-align: left; border-top: 1px solid #1a1a1a; padding-top: 50px; }
+        .journal-item { padding: 35px 0; border-bottom: 1px solid #111; }
+        .j-meta { font-size: 0.5rem; letter-spacing: 0.25em; color: var(--grey); margin-bottom: 12px; text-transform: uppercase; }
+        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.5rem; font-weight: 500; margin-bottom: 10px; }
+        .j-target { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
 
-        .btn-clear { background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.3em; cursor: pointer; margin-top: 80px; text-decoration: underline; width: 100%; text-align: center; }
+        .btn-clear { background: transparent; border: none; color: #222; font-size: 0.55rem; letter-spacing: 0.4em; cursor: pointer; margin-top: 100px; text-decoration: underline; width: 100%; text-align: center; text-transform: uppercase; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="noise"></div>
-    <div class="bg-text" id="bg-text">Hunt</div>
+    <div class="bg-text" id="bg-text">NOMADIC</div>
 
     <div class="container">
-        <h2 class="subtitle">The Hunter's Journey</h2>
+        <h2 class="subtitle">Daily Road Movie</h2>
         <h1 class="vogue-title">NOMADIC</h1>
-        <div class="stats"><span id="regions-count">0</span> / 368 TREASURES FOUND</div>
+        <div class="stats"><span id="regions-count">0</span> / 368 COLLECTED</div>
         
         <div class="display-stage">
-            <div class="target-display" id="target-result">...</div>
-            <div class="loc-display" id="loc-result">Location Pending</div>
+            <div class="loc-display" id="loc-result">...</div>
+            <div class="target-display" id="target-result">TARGET PENDING</div>
         </div>
 
-        <button class="btn-vogue" id="draw-btn" onclick="drawFate()">Draw Target</button>
+        <button class="btn-vogue" id="draw-btn" onclick="drawFate()">Draw Scene</button>
 
         <div id="mission-panel" class="mission-panel">
-            <span class="mission-label">TREASURE SHOT LIST</span>
-            <div class="mission-text" id="mission-content">尋找當地的印記，並拍下屬於你們的 VOGUE 封面。</div>
+            <span class="mission-label">Cinematic Shot List</span>
+            <div class="mission-text" id="mission-content">...</div>
         </div>
 
         <div class="archive-section">
-            <div style="font-size: 0.6rem; letter-spacing: 0.5em; color: #444; margin-bottom: 30px; text-transform: uppercase;">Treasure Archive</div>
+            <div style="font-size: 0.6rem; letter-spacing: 0.6em; color: #444; margin-bottom: 40px; text-transform: uppercase;">Footprints Archive</div>
             <div id="journal-list"></div>
-            <button class="btn-clear" onclick="clearData()">ERASE ALL FOOTPRINTS</button>
+            <button class="btn-clear" onclick="clearData()">Erase All Records</button>
         </div>
     </div>
 
     <script>
         const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
 
-        const treasureConfig = {
-            "餘暉獵手": { color: "#ff8c42", bgText: "SUNSET", mission: "在該行政區尋找「最開闊的西方」，拍一張兩人的側臉在橘紅暖陽中連成一線的剪影。" },
-            "蔚藍邊界": { color: "#4a90e2", bgText: "OCEAN", mission: "尋找水域（漁港、溪流或噴泉），錄下一段兩人的腳尖踏入水中的慢動作，錄下專屬的頻率。" },
-            "巔峰視角": { color: "#2d5a4c", bgText: "PEAK", mission: "尋找該區最高點（瞭望台或山路口），拍下一張俯瞰全區的大全景，兩人縮小在畫面一角。" },
-            "隱味食肆": { color: "#b83b3b", bgText: "EATERY", mission: "尋找無名小吃攤或老麵店，錄下老闆料理時的煙霧，以及對方吃下第一口時最真實的反應。" },
-            "遺落遺跡": { color: "#d4b483", bgText: "RELIC", mission: "尋找舊火車站、廢墟或老建築，拍一張微觀特寫：兩人的手與斑駁材質（鐵鏽或木紋）交疊。" },
-            "幻境樂園": { color: "#9b51e0", bgText: "PLAY", mission: "尋找色彩鮮豔的地標或遊樂園設施，利用誇張的比例與對比色，拍一張動作冷酷但時尚的時裝風格照。" },
-            "閃爍之城": { color: "#56ccf2", bgText: "NIGHT", mission: "尋找該區最亮的光點（夜景或加油站），利用地面積水或玻璃，拍下兩人在霓虹光影中的倒影。" },
-            "文藝秘境": { color: "#6fcf97", bgText: "SILENT", mission: "尋找靜謐空間（獨立書店或校園操場），拍一張對方在架前翻閱或看天空的背影，留白要多。" }
+        const huntConfig = {
+            "SUNSET": { name: "餘暉獵手", color: "#ff8c42", mission: "尋找該行政區最開闊的西方，拍下兩人的側臉在橘紅暖陽中連成一線的剪影。" },
+            "DAWN": { name: "破曉晨曦", color: "#f2c94c", mission: "捕捉第一道光穿過兩人指尖的瞬間，紀錄當日冒險啟程的希望感。" },
+            "CLOUD": { name: "雲巔幻境", color: "#ebf8ff", mission: "在高海拔點或大霧過後的山坡，拍下兩人在雲霧繚繞中若隱若現的背影。" },
+            "OCEAN": { name: "蔚藍邊界", color: "#4a90e2", mission: "尋找水域（漁港、海灘或溪流），錄下兩人走向水的慢動作，紀錄水的頻率。" },
+            "PEAK": { name: "巔峰視角", color: "#2d5a4c", mission: "尋找該區最高點，拍下俯瞰全區的大全景，將兩人縮小在畫面的一角。" },
+            "EATERY": { name: "隱味食肆", color: "#b83b3b", mission: "尋找無名小吃或在地老店，錄下老闆料理時的煙霧，以及對方第一口真實的反應。" },
+            "RELIC": { name: "遺落遺跡", color: "#d4b483", mission: "尋找舊車站、古厝或廢墟，拍一張微觀特寫：兩人的手與斑駁材質（鐵鏽或木紋）交疊。" },
+            "PLAY": { name: "幻境樂園", color: "#9b51e0", mission: "尋找地標、特色公園或遊樂設施，利用誇張比例與對比色，拍一張動作冷酷的封面照。" },
+            "NIGHT": { name: "閃爍之城", color: "#56ccf2", mission: "尋找該區最亮的光點，利用地面積水或玻璃反射，拍下兩人在霓虹光影中的倒影。" },
+            "SILENT": { name: "文藝秘境", color: "#6fcf97", mission: "尋找靜謐空間（獨立書店或校園），拍一張對方在架前翻閱或看天空的背影。" },
+            "MARKET": { name: "常民採集", color: "#f2994a", mission: "前往傳統市場或農會，買一樣在地特產，拍下一張兩人拿著戰利品大笑的劇照。" },
+            "BOULEVARD": { name: "物件考古", color: "#ae81ff", mission: "在當地的雜貨店或老街店鋪，尋找一件具年代感的小物並購買，拍下它的特寫紀錄。" }
         };
 
-        const treasureKeys = Object.keys(treasureConfig);
-        let masterJournal = JSON.parse(localStorage.getItem('nomadic_hunter_log')) || [];
+        const huntKeys = Object.keys(huntConfig);
+        let masterJournal = JSON.parse(localStorage.getItem('nomadic_vogue_v3')) || [];
 
         window.onload = updateUI;
 
@@ -99,70 +100,71 @@
             document.getElementById('regions-count').innerText = unique.size;
             const listEl = document.getElementById('journal-list');
             if (masterJournal.length === 0) {
-                listEl.innerHTML = '<div style="color:#222; font-size:0.55rem; letter-spacing:0.2em; text-align:center;">NO TREASURES FOUND.</div>';
+                listEl.innerHTML = '<div style="color:#222; font-size:0.55rem; letter-spacing:0.3em; text-align:center; padding:40px 0;">AWAITING EXPLORATION.</div>';
             } else {
                 listEl.innerHTML = [...masterJournal].reverse().map(log => `
-                    <div class="journal-item" style="border-left: 2px solid ${treasureConfig[log.target] ? treasureConfig[log.target].color : '#333'}; padding-left: 20px;">
-                        <div class="j-meta">${log.date} / ${log.target}</div>
+                    <div class="journal-item">
+                        <div class="j-meta">${log.date} / ${log.targetName}</div>
                         <div class="j-name">${log.name}</div>
-                        <div class="j-target">任務：${treasureConfig[log.target].mission}</div>
+                        <div class="j-target" style="color: ${huntConfig[log.targetKey] ? huntConfig[log.targetKey].color : 'var(--grey)'}">${log.targetKey} MISSION COMPLETED</div>
                     </div>
                 `).join('');
             }
         }
 
         function drawFate() {
-            const targetEl = document.getElementById('target-result');
             const locEl = document.getElementById('loc-result');
+            const targetEl = document.getElementById('target-result');
             const panel = document.getElementById('mission-panel');
             const btn = document.getElementById('draw-btn');
             
             const pool = taiwanData.filter(d => !masterJournal.some(j => j.name === d));
-            if (pool.length === 0) { targetEl.innerText = "Complete!"; return; }
+            if (pool.length === 0) { locEl.innerText = "ALL COLLECTED"; return; }
 
             btn.disabled = true;
             panel.classList.remove('active');
 
             let i = 0;
             const timer = setInterval(() => {
-                targetEl.innerText = treasureKeys[Math.floor(Math.random() * treasureKeys.length)];
                 locEl.innerText = pool[Math.floor(Math.random() * pool.length)];
+                targetEl.innerText = huntConfig[huntKeys[Math.floor(Math.random() * huntKeys.length)]].name;
                 i++;
                 if (i > 15) {
                     clearInterval(timer);
-                    const finalTarget = treasureKeys[Math.floor(Math.random() * treasureKeys.length)];
                     const finalLoc = pool[Math.floor(Math.random() * pool.length)];
-                    const cfg = treasureConfig[finalTarget];
+                    const finalTargetKey = huntKeys[Math.floor(Math.random() * huntKeys.length)];
+                    const cfg = huntConfig[finalTargetKey];
 
-                    targetEl.innerText = finalTarget;
                     locEl.innerText = finalLoc;
+                    targetEl.innerText = cfg.name;
                     
                     document.body.style.setProperty('--active-color', cfg.color);
-                    document.getElementById('bg-text').innerText = cfg.bgText;
-                    document.getElementById('bg-text').style.color = cfg.color + "11";
+                    document.getElementById('bg-text').innerText = finalTargetKey;
+                    document.getElementById('bg-text').style.color = cfg.color + "09";
                     document.getElementById('mission-content').innerText = cfg.mission;
                     
                     panel.classList.add('active');
                     btn.disabled = false;
 
-                    autoSave(finalLoc, finalTarget);
+                    autoSave(finalLoc, finalTargetKey, cfg.name);
                 }
             }, 80);
         }
 
-        function autoSave(loc, target) {
+        function autoSave(loc, targetKey, targetName) {
             masterJournal.push({
                 name: loc,
-                target: target,
+                targetKey: targetKey,
+                targetName: targetName,
                 date: new Date().toLocaleDateString()
             });
-            localStorage.setItem('nomadic_hunter_log', JSON.stringify(masterJournal));
+            localStorage.setItem('nomadic_vogue_v3', JSON.stringify(masterJournal));
             setTimeout(updateUI, 1200);
         }
 
         function clearData() {
-            if (confirm("Erase all hunter logs?")) {
-                localStorage.removeItem('nomadic_hunter_log');
+            if (confirm("ERASE ALL MEMORIES?")) {
+                localStorage.removeItem('nomadic_vogue_v3');
                 location.reload();
             }
         }
