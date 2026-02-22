@@ -8,52 +8,57 @@
     <style>
         :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #777777; }
 
-        /* 隱藏捲軸但保持滑動 */
+        /* 隱藏捲軸 */
         ::-webkit-scrollbar { display: none; }
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', 'Noto Serif TC', sans-serif;
             background-color: var(--black); color: var(--white);
-            scrollbar-width: none;
+            scroll-behavior: smooth;
         }
 
-        /* 底片質感噪點 */
+        /* 底片噪點 */
         .noise {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9999;
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E');
         }
 
-        /* 卷首語區塊 (首屏) */
+        /* --- 第一頁：PREFACE 故事扉頁 --- */
         .preface-section {
             height: 100vh; width: 100%; display: flex; flex-direction: column;
             justify-content: center; align-items: center; padding: 40px;
-            box-sizing: border-box; text-align: center;
+            box-sizing: border-box; text-align: center; position: relative;
         }
-        .preface-content { max-width: 600px; animation: fadeIn 2s ease forwards; }
+        .preface-content { max-width: 600px; animation: fadeIn 2.5s ease; }
         .preface-content h1 {
-            font-family: 'Playfair Display', serif; font-size: 0.7rem;
-            letter-spacing: 0.5em; text-transform: uppercase; color: var(--grey);
-            margin-bottom: 40px; font-weight: 300;
+            font-family: 'Playfair Display', serif; font-size: 0.75rem;
+            letter-spacing: 0.6em; text-transform: uppercase; color: var(--grey);
+            margin-bottom: 50px; font-weight: 300;
         }
         .preface-text {
             font-family: 'Noto Serif TC', serif; font-size: 0.95rem;
-            line-height: 2.2; color: #bbb; font-weight: 200; letter-spacing: 0.05em;
+            line-height: 2.3; color: #bbb; font-weight: 200; letter-spacing: 0.05em;
         }
-        .scroll-hint {
-            position: absolute; bottom: 40px; font-size: 0.6rem;
-            letter-spacing: 0.3em; color: #444; text-transform: uppercase;
-            animation: bounce 2s infinite;
+        .enter-archives-btn {
+            margin-top: 60px; font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+            background: transparent; border: none; color: var(--white);
+            cursor: pointer; border-bottom: 1px solid var(--white);
+            padding-bottom: 8px; transition: 0.5s; text-decoration: none;
         }
+        .enter-archives-btn:hover { color: var(--grey); border-color: var(--grey); }
 
-        /* 藝廊區塊 (第二屏) */
+        /* --- 第二頁：THE ARCHIVES 藝廊書櫃 --- */
+        .archives-section { min-height: 100vh; width: 100%; background-color: var(--black); }
+
         .header {
-            text-align: center; padding: 100px 20px 40px 20px;
-            letter-spacing: 0.4em; font-size: 0.6rem; text-transform: uppercase;
+            text-align: center; padding: 100px 20px 50px 20px;
+            letter-spacing: 0.5em; font-size: 0.65rem; text-transform: uppercase;
             font-weight: 200; color: var(--grey);
         }
         .header strong {
-            font-family: 'Playfair Display', serif; font-size: 2rem;
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
             color: var(--white); display: block; margin-bottom: 12px;
             font-weight: 400; letter-spacing: 0.1em; font-style: italic;
         }
@@ -88,26 +93,27 @@
         .title { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; font-weight: 300; }
         .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #888; font-weight: 200; letter-spacing: 0.15em; }
 
+        /* 跑馬燈 */
         .footer-marquee {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px);
-            padding: 18px 0; border-top: 1px solid rgba(255,255,255,0.05); z-index: 100;
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px);
+            padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); z-index: 100;
         }
         .marquee-inner {
             display: inline-block; white-space: nowrap;
-            animation: move 45s linear infinite; font-size: 0.6rem;
-            letter-spacing: 0.35em; color: var(--grey); text-transform: uppercase;
+            animation: move 50s linear infinite; font-size: 0.6rem;
+            letter-spacing: 0.4em; color: var(--grey); text-transform: uppercase;
         }
 
         /* 動畫 */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         @media (max-width: 650px) {
             .gallery { grid-template-columns: 1fr; gap: 30px; }
-            .preface-text { font-size: 0.85rem; padding: 0 10px; }
             .card { max-width: 320px; margin: 0 auto; }
+            .header strong { font-size: 1.8rem; }
+            .preface-text { font-size: 0.9rem; padding: 0 10px; }
         }
     </style>
 </head>
@@ -122,72 +128,73 @@
                 我們總是在地圖上尋找終點，卻忘了出發的本質是為了迷失。<br><br>
                 L'ÉVASION，是一場關於「逃避」的藝術。逃避那些被定義好的路線，逃避那些重複的點餐邏輯，逃避所有必須精確的時分秒。<br><br>
                 在 WADE 的駕駛座與 CLOUDY 的副駕視角之間，宇宙從不吝嗇於給予驚喜。只要你願意交出導航的控制權，那些未知的座標、共振的頻率與深夜的對話，就會在觀景窗裡緩緩顯化。<br><br>
-                這份檔案，記錄了所有駛離日常的瞬間。<br>
-                準備好，我們再次出發。
+                這份檔案，記錄了所有駛離日常的瞬間。
             </p>
+            <a href="#archives" class="enter-archives-btn">Open The Archives</a>
         </div>
-        <div class="scroll-hint">Scroll to Archives</div>
     </section>
 
-    <div class="header" id="archives">
-        <strong>THE ARCHIVES</strong>
-        The Ultimate Hexalogy
-    </div>
+    <section class="archives-section" id="archives">
+        <div class="header">
+            <strong>THE ARCHIVES</strong>
+            The Ultimate Hexalogy
+        </div>
 
-    <div class="gallery">
-        <a href="vol_01.html" class="card">
-            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1000');"></div>
-            <div class="card-content">
-                <div class="vol">Vol. 01</div>
-                <div class="title">The Travel Issue</div>
-                <div class="subtitle">駛向未知的副駕視角</div>
-            </div>
-        </a>
-        <a href="vol_02.html" class="card">
-            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000');"></div>
-            <div class="card-content">
-                <div class="vol">Vol. 02</div>
-                <div class="title">The Taste Issue</div>
-                <div class="subtitle">交付直覺的餐桌對白</div>
-            </div>
-        </a>
-        <a href="vol_03.html" class="card">
-            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000');"></div>
-            <div class="card-content">
-                <div class="vol">Vol. 03</div>
-                <div class="title">The Void Issue</div>
-                <div class="subtitle">遠離喧囂的靜謐留白</div>
-            </div>
-        </a>
-        <a href="vol_04.html" class="card">
-            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000');"></div>
-            <div class="card-content">
-                <div class="vol">Vol. 04</div>
-                <div class="title">The Sound Issue</div>
-                <div class="subtitle">共振靈魂的頻率紀錄</div>
-            </div>
-        </a>
-        <a href="vol_05.html" class="card">
-            <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/15095997544125871261_0');"></div>
-            <div class="card-content">
-                <div class="vol">Vol. 05</div>
-                <div class="title">The Vision Issue</div>
-                <div class="subtitle">預演未來的顯化畫報</div>
-            </div>
-        </a>
-        <a href="vol_06.html" class="card">
-            <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/2948395688518118017_0');"></div>
-            <div class="card-content">
-                <div class="vol">Vol. 06</div>
-                <div class="title">The Night Issue</div>
-                <div class="subtitle">沉溺光影的午夜逃亡</div>
-            </div>
-        </a>
-    </div>
+        <div class="gallery">
+            <a href="vol_01.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 01</div>
+                    <div class="title">The Travel Issue</div>
+                    <div class="subtitle">駛向未知的副駕視角</div>
+                </div>
+            </a>
+            <a href="vol_02.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 02</div>
+                    <div class="title">The Taste Issue</div>
+                    <div class="subtitle">交付直覺的餐桌對白</div>
+                </div>
+            </a>
+            <a href="vol_03.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 03</div>
+                    <div class="title">The Void Issue</div>
+                    <div class="subtitle">遠離喧囂的靜謐留白</div>
+                </div>
+            </a>
+            <a href="vol_04.html" class="card">
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 04</div>
+                    <div class="title">The Sound Issue</div>
+                    <div class="subtitle">共振靈魂的頻率紀錄</div>
+                </div>
+            </a>
+            <a href="vol_05.html" class="card">
+                <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/15095997544125871261_0');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 05</div>
+                    <div class="title">The Vision Issue</div>
+                    <div class="subtitle">預演未來的顯化畫報</div>
+                </div>
+            </a>
+            <a href="vol_06.html" class="card">
+                <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/2948395688518118017_0');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 06</div>
+                    <div class="title">The Night Issue</div>
+                    <div class="subtitle">沉溺光影的午夜逃亡</div>
+                </div>
+            </a>
+        </div>
+    </section>
 
     <div class="footer-marquee">
         <div class="marquee-inner">
-            L'ÉVASION : THE ART OF US ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ NOT ALL THOSE WHO WANDER ARE LOST ✦ L'ÉVASION : THE ART OF US ✦ SURRENDER CONTROL TO THE UNIVERSE ✦
+            L'ÉVASION : THE ART OF US ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ NOT ALL THOSE WHO WANDER ARE LOST ✦ L'ÉVASION : THE ART OF US ✦
         </div>
     </div>
 
