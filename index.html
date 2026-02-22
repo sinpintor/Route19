@@ -63,6 +63,10 @@
         .j-mission { font-size: 0.55rem; color: #555; margin-top: 15px; letter-spacing: 0.1em; border-top: 1px solid #222; padding-top: 10px;}
         .empty-state { color: #444; font-size: 0.7rem; letter-spacing: 0.1em; text-align: center; padding: 40px 0; }
         
+        /* 清除按鈕樣式 */
+        .btn-clear { background: transparent; border: 1px dashed rgba(255,255,255,0.2); color: var(--grey); padding: 15px; font-size: 0.6rem; letter-spacing: 0.3em; cursor: pointer; width: 100%; margin-top: 40px; transition: all 0.3s; }
+        .btn-clear:hover { border-color: var(--red); color: var(--red); background: rgba(184, 59, 59, 0.05); }
+
         .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 22vw; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; }
     </style>
 </head>
@@ -106,6 +110,8 @@
             </div>
             <div id="journal-list" class="journal-grid">
                 </div>
+            
+            <button class="btn-clear" onclick="clearJournal()">ERASE ALL MEMORIES (清空紀錄)</button>
         </div>
     </div>
 
@@ -220,6 +226,18 @@
                 btn.disabled = false;
                 isRolling = false;
             }, 1500);
+        }
+
+        // 清空紀錄功能
+        function clearJournal() {
+            const isConfirmed = confirm("Warning: 確定要清空所有探索紀錄嗎？\n此動作將燒毀目前的日誌，且無法復原。");
+            
+            if (isConfirmed) {
+                // 清除 localStorage 內的紀錄
+                localStorage.removeItem('nomadic_master_journal');
+                // 重新整理頁面以更新畫面與歸零進度
+                window.location.reload();
+            }
         }
     </script>
 </body>
