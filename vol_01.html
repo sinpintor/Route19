@@ -14,6 +14,7 @@
             height: 100%; overflow: hidden; -webkit-font-smoothing: antialiased;
         }
 
+        /* 背景微光效果 */
         .main-container {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: space-between; align-items: center;
@@ -28,10 +29,11 @@
         header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 700; margin: 0; }
         
         .footprint-stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.25em; color: var(--grey); text-transform: uppercase; cursor: pointer; }
+        #regions-count { color: var(--white); font-weight: 600; margin-left: 5px; }
 
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
 
-        /* --- VOGUE 風格前言 --- */
+        /* --- VOGUE 敘事扉頁 --- */
         #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
         .narrative-title { 
             font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; 
@@ -47,10 +49,10 @@
         /* --- 抽籤核心 --- */
         #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         #result { font-family: 'Noto Serif TC', serif; font-size: 2.8rem; letter-spacing: 0.1em; margin-bottom: 15px; font-weight: 500; color: var(--white); }
-        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: var(--gold); min-height: 4rem; font-style: italic; line-height: 1.6; max-width: 280px; margin: 0 auto; opacity: 0.9; }
+        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--gold); min-height: 4rem; font-style: italic; line-height: 1.6; max-width: 280px; margin: 0 auto; opacity: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
 
         .action-group { width: 100%; display: flex; flex-direction: column; gap: 15px; }
-        .btn-main { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 22px; font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; }
+        .btn-main { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 22px; font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; -webkit-tap-highlight-color: transparent; }
         
         #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; }
 
@@ -75,7 +77,7 @@
                 <div class="narrative-title">The Romantic Nomadic.</div>
                 <div class="story-text">
                     <span>有些靈魂註定無法被標記在靜止的座標上。</span>
-                    <span>對我們而言，移動不是為了抵達，而是一種有意識的流浪——在每一場駛向未知的副駕視角裡，將生活的瑣碎揉進公路的風。</span>
+                    <span>移動不是為了抵達，而是一種有意識的流浪——在每一場駛向未知的副駕視角裡，將生活的瑣碎揉進公路的風。</span>
                     <span>聽起來像羅曼蒂克，過起來是遊牧生活。</span>
                     <span>最遠的旅行，終點永遠是彼此的側臉。</span>
                 </div>
@@ -99,7 +101,7 @@
     </div>
 
     <script>
-        // 台灣 368 鄉鎮數據 (已完整包含)
+        // 台灣 368 鄉鎮完整數據
         const taiwanData = [
             "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
             "台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區",
@@ -124,28 +126,47 @@
             "金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉",
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
-        
-        // 100 個公路任務
-        const rawMissions = [
-            "在路邊買一袋當季水果", "拍一張對方的側臉", "找一間開很久的雜貨店", "在便利商店買一罐沒喝過的飲料", "紀錄一段導航的聲音", "找個看得到山頭的地方停車", "跟當地的路標合照一張", "尋找當地最老的一棵樹", "在當地買一份傳統早餐", "拍下這條路上的電線桿剪影", "找一條沒走過的小徑鑽進去", "聽一首符合當下路況的歌", "在擋風玻璃拍一張倒影照片", "找一個投幣式販賣機買飲料", "在空曠處大喊一聲", "紀錄此刻的里程數", "拍一張對方在看地圖的樣子", "尋找這座城鎮最有名的指標", "下車感受一下當地的風速", "找一個有奇怪名字的站牌", "拍一張車內後照鏡的視角", "在當地買一個紀念小標籤", "找個地方看著夕陽消失", "模仿當地路人的走路節奏", "拍一張對方的背影", "在路邊攤點一份沒吃過的小吃", "找尋這條路上最美的一個彎道", "紀錄此刻車內的溫度", "拍下當地警察局或公所的牌子", "寫一張明信片給未來的自己", "找一個安靜的空地停十分鐘", "拍一張對方的笑容", "尋找這區最有特色的廟宇", "觀察一種當地的植物", "錄一段十秒鐘的路邊環境音", "找一個有流水的地方洗手", "拍下天空中最像某種動物的雲", "在車內大聲合唱一首歌", "拍下路邊的一隻狗或貓", "找一個特殊的門牌號碼", "在草地上坐三分鐘", "拍下此刻的光影變化", "找尋這座城鎮的市場入口", "在車窗上寫下彼此的名字", "紀錄路途中的一場小雨", "找一個高度高過三公尺的招牌", "跟對方的影子合照", "找尋當地的老戲院或老建築", "在下一個紅綠燈深呼吸三次", "拍下一張完全失焦的風景", "找一個有大樹遮陰的地方", "數數看這一路看到了多少台同色車", "拍下對方認真開車的神情", "找尋當地的古井或水源", "在沒人的路上跳一下", "錄一段關於此刻心情的語音", "拍一張有對稱感的照片", "找一個色彩很繽紛的牆壁", "跟對方交換一個旅遊秘密", "拍下一張看起來像電影劇照的照片", "找尋當地的特色公園", "在車內噴一點喜歡的香氛", "拍下一張路面的質地照片", "找一個有風標或旗幟的地方", "跟對方擊掌慶祝抵達", "拍下一張夜晚的路燈", "找尋這條路上最有味道的舊招牌", "在目的地買兩瓶一樣的飲料", "拍下一張對方在思考的樣子", "找尋這區最高的建築物", "在路邊跟一位路人點頭微笑", "拍下天空最藍的角度", "找尋當地的特色郵筒", "在車內共享一份小點心", "拍下一張黑白效果的照片", "找尋這條路上最舊的一個路標", "觀察路邊的野花三分鐘", "錄下一段風吹過車窗的聲音", "拍下一張垂直向上的天空視告", "找一個有歷史感的長椅坐下", "跟對方說一件感謝的事", "拍下一張對方的局部特寫", "找尋當地的校園大門", "在目的地轉一圈", "拍下一張有強烈對比色的東西", "找尋這條路上最有活力的顏色", "在路邊安靜地聽一次鳥叫", "拍下一張車窗外的地平線", "找尋當地的消防栓", "跟對方預約下一次的旅行主題", "拍下一張有模糊動態感的路景", "找尋這區最窄的一條巷子", "在車內安靜地待一分鐘", "拍下一張天空與電線的交織", "找尋當地的特色路燈設計", "紀錄下這個座標的具體感覺", "拍下一張對方的剪影", "找尋當地的社區公告欄", "跟這份網頁合照一張", "在終點深深一吻"
-        ];
+
+        // VOGUE 風格任務生成器
+        const subjects = ["紀錄", "捕捉", "觀察", "凝視", "帶走", "留白", "感受", "標記"];
+        const modifiers = ["靜止的", "流動的", "被時間遺忘的", "帶有顆粒感的", "低調且奢華的", "公路質感的", "屬於此刻的", "帶有情緒的"];
+        const objects = ["空氣裡的濕度", "擋風玻璃上的光斑", "對方指尖的節奏", "後照鏡裡的遠方", "公路盡頭的灰調", "在地建築的質地", "老雜貨店的氣味", "一抹意外的色彩", "路標與天空的交會", "便利商店的冷冽", "路邊野草的律動", "車窗外的地平線"];
+
+        function generateVogueMissions(count) {
+            let m = [];
+            for(let i=0; i<count; i++) {
+                const s = subjects[Math.floor(Math.random()*subjects.length)];
+                const mod = modifiers[Math.floor(Math.random()*modifiers.length)];
+                const o = objects[Math.floor(Math.random()*objects.length)];
+                m.push(`${s}${mod}${o}。`);
+            }
+            return m;
+        }
+
+        const vMissions = generateVogueMissions(500);
 
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_footprints')) || [];
         let currentResult = "";
         document.getElementById('regions-count').innerText = visitedPlaces.length;
 
         function unfold() {
-            document.getElementById('prologue').style.opacity = '0';
-            document.getElementById('prologue').style.transform = 'translateY(-15px)';
-            document.getElementById('unfold-btn').style.display = 'none';
+            const prologue = document.getElementById('prologue');
+            const unfoldBtn = document.getElementById('unfold-btn');
+            const mapCore = document.getElementById('map-core');
+            const actionBtns = document.getElementById('action-btns');
+
+            prologue.style.opacity = '0';
+            prologue.style.transform = 'translateY(-15px)';
+            unfoldBtn.style.opacity = '0';
 
             setTimeout(() => {
-                document.getElementById('prologue').style.display = 'none';
-                document.getElementById('map-core').style.display = 'block';
-                document.getElementById('action-btns').style.display = 'flex';
+                prologue.style.display = 'none';
+                unfoldBtn.style.display = 'none';
+                mapCore.style.display = 'block';
+                actionBtns.style.display = 'flex';
                 setTimeout(() => {
-                    document.getElementById('map-core').style.opacity = '1';
-                    document.getElementById('map-core').style.transform = 'translateY(0)';
+                    mapCore.style.opacity = '1';
+                    mapCore.style.transform = 'translateY(0)';
                 }, 50);
             }, 1200);
         }
@@ -165,7 +186,7 @@
             setTimeout(() => {
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
                 resultEl.innerText = currentResult;
-                taskEl.innerText = rawMissions[Math.floor(Math.random() * rawMissions.length)];
+                taskEl.innerText = vMissions[Math.floor(Math.random() * vMissions.length)];
                 resultEl.style.opacity = 1;
                 taskEl.style.opacity = 0.95;
                 checkInSection.style.display = "block";
@@ -181,7 +202,7 @@
         }
 
         function clearFootprints() {
-            if (confirm("要清空所有足跡紀錄嗎？")) {
+            if (confirm("確定要將所有足跡歸零嗎？")) {
                 visitedPlaces = []; localStorage.removeItem('nomadic_footprints'); location.reload();
             }
         }
