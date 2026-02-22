@@ -94,14 +94,17 @@
         .marquee-wrapper {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background-color: var(--white); color: var(--black);
-            padding: 10px 0; overflow: hidden; white-space: nowrap; z-index: 20;
+            padding: 12px 0; overflow: hidden; white-space: nowrap; z-index: 20;
+            border-top: 1px solid #e0e0e0;
         }
         .marquee-content {
-            display: inline-block; font-size: 0.65rem; letter-spacing: 0.2em;
-            text-transform: uppercase; font-weight: 600;
-            animation: marquee 25s linear infinite;
+            display: inline-block; font-size: 0.7rem; letter-spacing: 0.25em;
+            text-transform: uppercase; font-weight: 500;
+            /* 調整秒數讓閱讀更舒適 */
+            animation: marquee 40s linear infinite;
         }
-        .marquee-content span { margin-right: 50px; }
+        .marquee-content span.text { margin: 0 15px; }
+        .marquee-content span.star { margin: 0 15px; color: #888; font-size: 0.6rem; }
 
         @keyframes marquee {
             0% { transform: translateX(0); }
@@ -148,14 +151,30 @@
 
     <div class="marquee-wrapper">
         <div class="marquee-content">
-            <span>WADE & CLOUDY THE ARCHIVES</span>
-            <span>MANIFESTING THE JOURNEY</span>
-            <span>SURRENDER CONTROL</span>
-            <span>THE ART OF WANDERING</span>
-            <span>WADE & CLOUDY THE ARCHIVES</span>
-            <span>MANIFESTING THE JOURNEY</span>
-            <span>SURRENDER CONTROL</span>
-            <span>THE ART OF WANDERING</span>
+            <span class="text">NOT ALL THOSE WHO WANDER ARE LOST</span>
+            <span class="star">✦</span>
+            <span class="text">THE JOURNEY NOT THE ARRIVAL MATTERS</span>
+            <span class="star">✦</span>
+            <span class="text">SURRENDER CONTROL TO THE UNIVERSE</span>
+            <span class="star">✦</span>
+            <span class="text">TO TRAVEL IS TO LIVE</span>
+            <span class="star">✦</span>
+            <span class="text">WANDERING WITHOUT AN ITINERARY IS AN ART</span>
+            <span class="star">✦</span>
+            <span class="text">LET INTUITION LEAD THE WAY</span>
+            <span class="star">✦</span>
+            <span class="text">NOT ALL THOSE WHO WANDER ARE LOST</span>
+            <span class="star">✦</span>
+            <span class="text">THE JOURNEY NOT THE ARRIVAL MATTERS</span>
+            <span class="star">✦</span>
+            <span class="text">SURRENDER CONTROL TO THE UNIVERSE</span>
+            <span class="star">✦</span>
+            <span class="text">TO TRAVEL IS TO LIVE</span>
+            <span class="star">✦</span>
+            <span class="text">WANDERING WITHOUT AN ITINERARY IS AN ART</span>
+            <span class="star">✦</span>
+            <span class="text">LET INTUITION LEAD THE WAY</span>
+            <span class="star">✦</span>
         </div>
     </div>
 
