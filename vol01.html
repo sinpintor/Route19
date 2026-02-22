@@ -6,121 +6,133 @@
     <title>VOL.01 The Travel Issue — NOMADIC</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #888888; --dark-grey: #1a1a1a; }
+        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #888888; --dark-grey: #151515; }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; }
         
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
 
-        .container { max-width: 600px; margin: 0 auto; padding: calc(60px + env(safe-area-inset-top)) 30px 100px; box-sizing: border-box; }
+        .container { max-width: 600px; margin: 0 auto; padding: calc(40px + env(safe-area-inset-top)) 25px 80px; box-sizing: border-box; }
 
-        /* Header Area */
-        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.2em; display: inline-block; margin-bottom: 40px; transition: color 0.3s; }
-        .nav-back:hover { color: var(--gold); }
+        /* Header */
+        .nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.2em; }
 
-        .issue-meta { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
-        .issue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; margin: 0 0 30px 0; line-height: 1.2; }
+        /* Stamp Design */
+        .stamp-area { position: relative; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+        .digital-stamp { width: 120px; height: 120px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--gold); font-size: 0.5rem; letter-spacing: 0.1em; padding: 10px; opacity: 0.3; transform: rotate(-15deg); transition: all 0.8s ease; }
+        .stamped .digital-stamp { opacity: 1; transform: rotate(10deg) scale(1.1); border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(212, 180, 131, 0.2); }
 
-        /* Destination Display */
-        .destination-card { background: var(--dark-grey); padding: 40px 20px; border: 1px solid rgba(212, 180, 131, 0.2); margin-bottom: 40px; position: relative; }
-        .dest-label { font-size: 0.55rem; color: var(--grey); letter-spacing: 0.3em; margin-bottom: 15px; }
-        .dest-name { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; color: var(--white); }
+        .dest-name { font-family: 'Noto Serif TC', serif; font-size: 2.8rem; font-weight: 500; margin: 20px 0; color: var(--white); text-align: center; }
 
-        /* Missions Section */
-        .mission-box { text-align: left; margin-top: 50px; }
-        .section-label { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--grey); border-bottom: 1px solid var(--dark-grey); padding-bottom: 10px; margin-bottom: 25px; display: block; }
-        
-        .mission-item { margin-bottom: 30px; opacity: 0; transform: translateY(10px); animation: fadeInUp 0.8s ease forwards; }
-        .mission-item:nth-child(2) { animation-delay: 0.2s; }
-        .mission-item:nth-child(3) { animation-delay: 0.4s; }
+        /* Random Missions */
+        .mission-card { background: var(--dark-grey); border: 1px solid rgba(255,255,255,0.05); padding: 30px; margin-bottom: 30px; }
+        .mission-label { font-size: 0.6rem; color: var(--gold); letter-spacing: 0.4em; margin-bottom: 20px; display: block; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: #eee; min-height: 80px; }
 
-        .m-num { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); font-size: 1.2rem; margin-bottom: 5px; }
-        .m-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; line-height: 1.8; color: #ccc; }
+        /* Journal Input */
+        .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--white); font-family: 'Noto Serif TC', serif; padding: 15px 0; margin-bottom: 40px; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+        .journal-input:focus { border-color: var(--gold); }
 
         /* Action Button */
-        .btn-complete { margin-top: 40px; background: var(--gold); border: none; color: var(--black); padding: 20px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; width: 100%; transition: opacity 0.3s; }
-        .btn-complete:active { opacity: 0.8; }
-        .btn-complete.done { background: transparent; border: 1px solid var(--grey); color: var(--grey); cursor: default; }
+        .btn-log { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.3em; cursor: pointer; width: 100%; transition: all 0.3s; }
+        .btn-log:hover { background: var(--white); color: var(--black); }
+        .btn-log.disabled { display: none; }
 
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-
-        .footer-note { margin-top: 60px; font-size: 0.6rem; color: #444; line-height: 2; letter-spacing: 0.1em; }
+        /* Logged View */
+        .logged-info { display: none; text-align: center; font-size: 0.7rem; color: var(--grey); letter-spacing: 0.1em; line-height: 2; }
     </style>
 </head>
 <body>
 
     <div class="noise"></div>
 
-    <div class="container">
-        <a href="index.html" class="nav-back">← BACK TO COMPASS</a>
-
-        <div class="issue-meta">Vol. 01</div>
-        <h1 class="issue-title">The Travel Issue</h1>
-
-        <div class="destination-card">
-            <div class="dest-label">CURRENT COORDINATE</div>
-            <div class="dest-name" id="display-loc">Seeking...</div>
+    <div class="container" id="main-content">
+        <div class="nav-header">
+            <a href="index.html" class="nav-back">← CLOSE ISSUE</a>
+            <div style="font-size: 0.6rem; color: var(--gold);">VOL. 01 / TRAVEL</div>
         </div>
 
-        <div class="mission-box">
-            <span class="section-label">PHOTOGRAPHIC MISSION</span>
-            
-            <div class="mission-item">
-                <div class="m-num">01. 捕捉光影</div>
-                <div class="m-text">尋找當地的老舊建築或自然植被，拍攝一張陽光灑落的陰影特寫。</div>
-            </div>
-
-            <div class="mission-item">
-                <div class="m-num">02. 漫遊者的觀察</div>
-                <div class="m-text">在不打擾的前提下，記錄一張展現該區日常節奏的照片（街道、招牌或路人）。</div>
-            </div>
-
-            <div class="mission-item">
-                <div class="m-num">03. 未知的記憶</div>
-                <div class="m-text">買一份當地的報紙或撿一片落葉，與你的相機合照，證明你曾抵達。</div>
-            </div>
+        <div class="stamp-area" id="stamp-container">
+            <div class="digital-stamp" id="stamp-date">NOT ARRIVED</div>
+            <h1 class="dest-name" id="display-loc">...</h1>
         </div>
 
-        <button class="btn-complete" id="complete-btn" onclick="markAsVisited()">ARRIVED & LOGGED</button>
-        
-        <div class="footer-note">
-            探索並非為了抵達終點，而是為了在未知的座標中重新找回感官。照片是時間的標本，而你是時間的收集者。
+        <div class="mission-card">
+            <span class="mission-label">RANDOM MISSION</span>
+            <div class="mission-text" id="mission-content">Generatig challenge...</div>
+        </div>
+
+        <div id="action-area">
+            <input type="text" class="journal-input" id="journal-text" placeholder="寫下一句話，留存此地的氣味或光影...">
+            <button class="btn-log" onclick="saveJourney()">MINT JOURNEY LOG (留下足跡)</button>
+        </div>
+
+        <div class="logged-info" id="logged-view">
+            <p id="saved-journal"></p>
+            <p style="margin-top: 30px; border-top: 1px solid #222; padding-top: 20px;">
+                此足跡已永久寫入你的探險日誌。<br>
+                探索度已更新。
+            </p>
         </div>
     </div>
 
     <script>
-        // 從 URL 獲取目的地參數
+        const missions = [
+            "拍攝一張「垂直」視角的照片，避開所有地平線。",
+            "尋找該地區最古老的標誌或招牌，記錄文字的斑駁。",
+            "在當地便利商店買一瓶沒喝過的飲料，以此為背景拍攝街道。",
+            "觀察光影，拍攝一張光亮與黑暗比例為 1:1 的構圖。",
+            "紀錄一種屬於這裡的顏色，畫面中只能出現該色系。",
+            "對著反射面（鏡子、櫥窗）拍攝一張包含你自己與街道的合照。"
+        ];
+
         const urlParams = new URLSearchParams(window.location.search);
-        const locationName = urlParams.get('loc') || "未知領域";
+        const locationName = urlParams.get('loc') || "未知座標";
+        
+        // 初始化頁面
         document.getElementById('display-loc').innerText = locationName;
+        
+        // 檢查是否已去過
+        let masterJournal = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
+        const existingRecord = masterJournal.find(v => v.name === locationName);
 
-        // 檢查是否已經去過
-        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
-        const btn = document.getElementById('complete-btn');
-
-        if (visitedPlaces.some(v => v.name === locationName)) {
-            setBtnToDone();
+        if (existingRecord) {
+            renderLoggedState(existingRecord);
+        } else {
+            // 隨機選一個任務（當次有效）
+            const randomMission = missions[Math.floor(Math.random() * missions.length)];
+            document.getElementById('mission-content').innerText = randomMission;
         }
 
-        function markAsVisited() {
-            if (visitedPlaces.some(v => v.name === locationName)) return;
+        function saveJourney() {
+            const note = document.getElementById('journal-text').value || "未留下文字。";
+            const mission = document.getElementById('mission-content').innerText;
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}.${now.getMonth()+1}.${now.getDate()}`;
 
-            const entry = {
+            const newRecord = {
                 name: locationName,
-                date: new Date().toLocaleDateString(),
+                date: dateStr,
+                note: note,
+                mission: mission,
                 issue: "VOL.01"
             };
 
-            visitedPlaces.push(entry);
-            localStorage.setItem('nomadic_master_journal', JSON.stringify(visitedPlaces));
+            masterJournal.push(newRecord);
+            localStorage.setItem('nomadic_master_journal', JSON.stringify(masterJournal));
             
-            setBtnToDone();
-            alert(`已紀錄：${locationName}。你的旅程已寫入指南針。`);
+            renderLoggedState(newRecord);
         }
 
-        function setBtnToDone() {
-            btn.innerText = "JOURNEY LOGGED";
-            btn.classList.add('done');
-            btn.onclick = null;
+        function renderLoggedState(record) {
+            // 切換視覺狀態
+            document.getElementById('stamp-container').classList.add('stamped');
+            document.getElementById('stamp-date').innerHTML = `ARRIVED<br>${record.date}`;
+            document.getElementById('mission-content').innerText = record.mission;
+            
+            document.getElementById('action-area').style.display = 'none';
+            document.getElementById('logged-view').style.display = 'block';
+            document.getElementById('saved-journal').innerText = `“ ${record.note} ”`;
         }
     </script>
 </body>
