@@ -2,223 +2,340 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WADE & CLOUDY - The Taste Issue</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>NOMADIC — Vol. 02</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #888888; --light-grey: #f4f4f4; --vogue-red: #8b0000; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Montserrat', 'Noto Serif TC', sans-serif; background-color: var(--black); overflow-x: hidden; scroll-behavior: smooth; }
+        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #888888; }
+        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; }
+        
+        .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
 
-        /* COVER */
-        #index-page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.4), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; color: var(--white); z-index: 10; transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform 1.2s cubic-bezier(0.65, 0, 0.35, 1); padding: 40px; box-sizing: border-box; }
-        .index-container { max-width: 650px; width: 100%; display: flex; flex-direction: column; align-items: center; }
-        .index-issue { font-size: 0.7rem; letter-spacing: 0.4em; color: #d1d1d1; text-transform: uppercase; margin-bottom: 3vh; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; width: 100%; text-align: center; }
-        .index-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; margin: 0; letter-spacing: 0.08em; text-align: center; line-height: 1.1; text-transform: uppercase; }
-        .index-subtitle { font-size: 0.85rem; letter-spacing: 0.5em; text-transform: uppercase; margin-top: 15px; margin-bottom: 50px; color: #b0b0b0; text-align: center; }
-        .editor-note { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 2; text-align: justify; color: #e0e0e0; margin-bottom: 50px; padding: 0 20px; font-weight: 300; }
-        .editor-note strong { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); display: block; margin-bottom: 15px; font-weight: 600; }
-        .enter-btn { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); border: 1px solid var(--white); padding: 18px 45px; cursor: pointer; transition: all 0.5s ease; color: var(--white); }
-        .enter-btn:hover { background: var(--white); color: var(--black); }
+        .main-container {
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            padding: calc(60px + env(safe-area-inset-top)) 30px 120px;
+            box-sizing: border-box; text-align: center;
+            /* 背景換了一張帶有深夜食堂/暖色微光感覺的圖 */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), 
+                        url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1000') center/cover no-repeat fixed;
+        }
+        
+        .back-nav { position: fixed; top: calc(20px + env(safe-area-inset-top)); left: 25px; z-index: 100; text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.3em; transition: 0.3s; }
 
-        /* GENERATOR */
-        #generator-page { position: absolute; top: 0; left: 0; width: 100%; min-height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--white); color: var(--black); z-index: 5; opacity: 0; pointer-events: none; padding: 40px 20px; box-sizing: border-box; transition: opacity 1.2s ease-in-out; }
-        .magazine-layout { width: 100%; max-width: 520px; }
-        .nav-back { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; color: var(--grey); margin-bottom: 30px; display: inline-block; transition: color 0.3s; text-decoration: none; }
-        .nav-back:hover { color: var(--black); }
-        .gen-masthead { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; text-align: center; letter-spacing: 0.1em; margin: 0; text-transform: uppercase; }
-        .control-panel { text-align: center; margin: 30px 0; font-size: 0.85em; letter-spacing: 0.2em; color: var(--grey); text-transform: uppercase;}
-        .destination-area { text-align: center; min-height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 20px; }
-        .result-box { font-family: 'Noto Serif TC', serif; font-size: 2.2em; font-weight: 400; letter-spacing: 0.05em; color: var(--vogue-red); line-height: 1.4; transition: color 0.3s; }
-        .duration-badge { font-size: 0.8em; letter-spacing: 0.15em; color: var(--black); margin-top: 20px; font-weight: 600; display: none; border-top: 1px solid #eaeaea; padding-top: 15px; line-height: 1.6;}
-        .mission-box { font-family: 'Noto Serif TC', serif; font-size: 0.95em; color: #222; padding: 25px 0 15px 0; margin-top: 10px; display: none; text-align: justify; line-height: 1.9; border-top: 1px solid var(--black); font-weight: 300; }
-        .mission-title { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8em; letter-spacing: 0.2em; margin-bottom: 10px; color: var(--black); text-transform: uppercase; }
-        .editorial-details { display: none; flex-direction: column; gap: 15px; background: var(--light-grey); padding: 20px; margin-bottom: 30px; border-left: 3px solid var(--black); }
-        .detail-item { font-size: 0.85em; line-height: 1.6; color: #333; }
-        .detail-item strong { font-family: 'Playfair Display', serif; font-size: 1.1em; font-style: italic; display: block; margin-bottom: 5px; color: var(--black); }
-        .btn-group { display: flex; flex-direction: column; gap: 12px; }
-        .action-btn { font-family: 'Montserrat', sans-serif; font-size: 0.75em; padding: 18px; cursor: pointer; border: 1px solid var(--black); transition: all 0.4s ease; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; text-decoration: none; width: 100%; box-sizing: border-box; display: block; font-weight: 500;}
-        .draw-btn { background-color: var(--black); color: var(--white); }
-        .draw-btn:hover { background-color: transparent; color: var(--black); }
-        .dispatch-btn { background-color: transparent; color: var(--black); display: none; }
-        .dispatch-btn:hover { background-color: var(--light-grey); }
-        .hidden { opacity: 0; transform: translateY(-30px); pointer-events: none; }
-        .loader { display: none; font-size: 0.8em; letter-spacing: 0.2em; color: var(--vogue-red); text-align: center; margin-top: 10px; font-style: italic; }
+        header h2 { font-family: 'Playfair Display', serif; font-size: 0.6rem; letter-spacing: 0.6em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
+        header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 700; margin: 0; }
+        .stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--grey); }
+        #regions-count { color: var(--gold); }
+
+        .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 45vh; margin: 30px 0; }
+
+        .content-block {
+            width: 100%; max-width: 340px; margin: 0 auto;
+            border-left: 1px solid var(--gold); padding-left: 20px;
+            text-align: left; box-sizing: border-box;
+        }
+
+        #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
+        .narrative-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: var(--gold); margin-bottom: 25px; letter-spacing: 0.1em; }
+        .story-text { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: #eee; line-height: 2.2; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 0; }
+        
+        #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        #result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 25px; letter-spacing: 0.05em; color: var(--white); transition: color 0.1s; }
+        
+        .mission-box { display: flex; flex-direction: column; gap: 18px; }
+        .mission-item { display: flex; flex-direction: column; gap: 4px; }
+        .mission-label { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; transition: color 0.1s;}
+
+        .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; transition: background 0.3s ease;}
+        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
+        #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; margin-bottom: 20px; text-align: center;}
+
+        .archive-section { width: 100%; max-width: 500px; margin-top: 80px; text-align: left; border-top: 1px solid #222; padding-top: 40px; }
+        .journal-item { margin-bottom: 45px; border-left: 1px solid var(--gold); padding-left: 20px; }
+        .journal-date { font-size: 0.6rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+        .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin: 8px 0 12px 0; font-weight: 500; color: var(--gold); }
+        .journal-mission { font-size: 0.85rem; color: #ccc; font-weight: 300; line-height: 1.7; display: flex; flex-direction: column; gap: 8px; }
+        .clear-btn { margin-top: 40px; background: transparent; border: none; color: #444; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div id="index-page">
-        <div class="index-container">
-            <div class="index-issue">Vol. 02 — The Taste Issue</div>
-            <h1 class="index-title">WADE & CLOUDY</h1>
-            <div class="index-subtitle">Surrender Your Craving</div>
-            <div class="editor-note">
-                <strong>Editor's Note —</strong>
-                在無數個「等一下吃什麼」的日常對話裡，我們往往消耗了太多選擇的力氣。真正的奢華，有時是閉上雙眼，將味蕾的決定權交給宇宙。<br><br>
-                這是一場專屬 WADE 與 CLOUDY 的味覺盲測。放下對菜單的控制欲，讓吸引力法則為今晚的餐桌指路；帶上相機，在咀嚼與微醺之間，捕捉彼此最放鬆、沒有防備的模樣。<br><br>
-                拉開椅子，入座吧。今晚的菜單，由直覺買單。
+    <div class="noise"></div>
+    <a href="index.html" class="back-nav">← BACK TO HOME</a>
+
+    <div class="main-container">
+        <header>
+            <h2>VOL. 02 — FULL ARCHIVE</h2>
+            <h1>The Intuitive Table</h1>
+            <div class="stats"><span id="regions-count">0</span> / 368 REGIONS EXPLORED</div>
+        </header>
+
+        <div class="display-area">
+            <div id="prologue" class="content-block">
+                <div class="narrative-title">Taste & Synchronicity.</div>
+                <p class="story-text">
+                    把味蕾交給直覺，把時間留給彼此。公路上的餐桌是一處臨時的庇護所，我們不看食評、不依賴導航，只憑當下的頻率推開一扇陌生的門。在熱氣氤氳與碗盤碰撞聲中，食物是引子，對話才是主菜。
+                </p>
             </div>
-            <button class="enter-btn" onclick="enterZine()">Turn The Page</button>
+
+            <div id="map-core" class="content-block">
+                <div id="result">The Unknown</div>
+                <div class="mission-box" id="mission-box">
+                    </div>
+            </div>
+        </div>
+
+        <div class="action-group">
+            <button id="unfold-btn" onclick="unfold()">REVEAL THE MENU</button>
+            <div id="action-btns" style="display:none; flex-direction: column; gap: 15px; width: 100%;">
+                <button class="btn-main" id="roll-btn" onclick="roll()">Draw Intuition</button>
+                <div id="check-in-section" style="display:none; width: 100%;">
+                    <button class="btn-main" style="background:var(--gold); color:var(--black); border:none; font-weight:600; width: 100%;" onclick="recordPlace()">Mark as Tasted</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="archive-section" id="archive-section" style="display:none;">
+            <div style="font-family:'Playfair Display'; font-style:italic; color:var(--gold); margin-bottom:25px; font-size:1rem;">The Dining Journal</div>
+            <div id="journal-list"></div>
+            <button class="clear-btn" onclick="clearFootprints()">RESET ALL DATA</button>
         </div>
     </div>
 
-    <div id="generator-page">
-        <div class="magazine-layout">
-            <a href="index.html" class="nav-back">← Back to Archives</a>
-            <h2 class="gen-masthead">The Flavor</h2>
-            
-            <div class="control-panel">
-                Manifesting Tonight's Vibe...
-            </div>
+    <script>
+        const taiwanData = [
+            "台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區",
+            "新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區",
+            "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
+            "桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區",
+            "新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉",
+            "新竹市 東區","新竹市 北區","新竹市 香山區",
+            "苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉",
+            "台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區",
+            "彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉",
+            "南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉",
+            "雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉",
+            "嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉",
+            "嘉義市 東區","嘉義市 西區",
+            "台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區",
+            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區",
+            "屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉",
+            "宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉",
+            "花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉",
+            "台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉",
+            "澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉",
+            "金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣烈嶼鄉","金門縣 烏坵鄉",
+            "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
+        ];
 
-            <div class="destination-area">
-                <div class="result-box" id="result">Waiting for Cravings</div>
-                <div class="duration-badge" id="duration-badge"></div>
-            </div>
+        // 題庫 1：[CUISINE] 吃什麼 (餐廳類型/氛圍)
+        const cuisines = [
+            "Google Map 上隨機找一間名字有『老』字的小吃店。",
+            "在地經營超過十年、看起來很有故事的麵店。",
+            "看起來完全沒有裝潢，只有幾張鐵桌椅的街邊小攤。",
+            "當地最有名的夜市或廟口周邊小吃。",
+            "一間充滿黃色暖光、充滿煙火氣的熱炒或居酒屋。",
+            "當地人狂推但外觀極度不起眼的便當店。",
+            "專賣甜點或冰品的復古老店。",
+            "名字看起來最奇葩、讓你滿頭問號的在地餐廳。",
+            "一間有賣大鍋滷味或黑白切的傳統小麵攤。",
+            "找一家『沒有冷氣，只有電風扇在轉』的硬核小吃店。"
+        ];
 
-            <div class="mission-box" id="mission-box"></div>
+        // 題庫 2：[ORDER] 怎麼點 (點餐大冒險)
+        const orderings = [
+            "請老闆推薦他最驕傲、最拿手的一道菜。",
+            "閉上眼睛，手指在菜單上盲點一道菜。",
+            "兩人互猜對方今天想吃什麼，幫對方決定主餐。",
+            "點菜單上最便宜跟最貴的食物各一份。",
+            "尋找菜單上名字最長、或最看不懂的食物。",
+            "點一份顏色跟你今天穿搭最搭的食物。",
+            "點三道菜，必須分別包含酸、甜、辣三種味道。",
+            "模仿在地人的點法，聽上一桌點什麼就跟著點。",
+            "只點菜單上第一排跟最後一排的食物。",
+            "給對方 200 元預算，讓他去自由發揮亂點一通。"
+        ];
 
-            <div class="editorial-details" id="editorial-details">
-                <div class="detail-item" id="oracle-card"></div>
-                <div class="detail-item" id="lens-vibe"></div>
-            </div>
+        // 題庫 3：[CHALLENGE] 攝影與互動任務
+        const challenges = [
+            "開啟閃光燈，近距離盲拍食物的油亮肌理與熱氣。",
+            "拍一張對方吃到滿嘴都是醬汁、最不顧形象的真實醜照。",
+            "在食物熱氣最旺盛的瞬間，隔著煙霧拍一張迷濛的乾杯照。",
+            "錄一段兩人吃東西時，完全不說話的純咀嚼 ASMR。",
+            "用雜誌拍精品的方式與角度，拍下這頓飯最便宜的那道菜。",
+            "挑戰用最嚴肅的『總裁表情』，吃一口最搞笑或最燙的食物。",
+            "捕捉對方喝飲料時，咬著吸管盯著你看的放空眼神。",
+            "完食後，把空盤跟用過的衛生紙拍成一幅現代行為藝術照。",
+            "一人閉眼吃對方餵的食物，拍下猜錯或被酸/辣到的崩潰瞬間。",
+            "用微距鏡頭（或拉近焦距）拍下食物被筷子夾起、拉絲的瞬間。"
+        ];
 
-            <div class="btn-group">
-                <button class="action-btn draw-btn" onclick="startRolling()">Reveal The Taste</button>
-                <button class="action-btn dispatch-btn" id="dispatch-btn" onclick="dispatchJourney()">Dispatch to LINE & Vault</button>
-                <div class="loader" id="loader">Manifesting and synchronizing...</div>
-            </div>
-        </div>
-    </div>
+        // 題庫 4：[DIALOGUE] 餐桌對話 (靈魂拷問)
+        const dialogues = [
+            "如果這頓飯是宇宙給我們的一個隱喻，你覺得它在暗示現階段的什麼？",
+            "說出一個你最近心裡突然冒出來，但還沒跟我分享過的『瘋狂小念頭』。",
+            "觀察這間店裡的其他客人，憑直覺挑一桌，幫他們編一個戲劇性的背景故事。",
+            "回想一下，我們過去吃過最狼狽、但卻最開心的一頓飯是哪一次？",
+            "拋開所有的限制（金錢、時間），直覺告訴你我們下一趟最該去哪裡流浪？",
+            "現在的生活中，有什麼事情就像眼前這道菜一樣，是需要『慢慢熬』的？",
+            "告訴我一個你從來沒抱怨過，但其實心裡有點在意的生活瑣碎小事。",
+            "如果你可以發明一道以『我』命名的菜，裡面會放什麼奇怪的食材？",
+            "如果我們老了要一起開一間這樣的小店，你想負責什麼職位？",
+            "說一件今天出門到現在，你覺得我特別可愛或迷人的一個瞬間。"
+        ];
 
-<script>
-    function enterZine() {
-        document.getElementById('index-page').classList.add('hidden');
-        setTimeout(() => { document.getElementById('generator-page').style.opacity = '1'; document.getElementById('generator-page').style.pointerEvents = 'auto'; }, 1000);
-    }
+        // ★ 注意：這裡改用 'nomadic_vol02_data'，避免覆蓋 Vol.01 的紀錄
+        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_vol02_data')) || [];
+        let currentResult = "";
+        let currentLogEntry = "";
+        let isRolling = false; 
 
-    const flavorProfiles = [
-        "Smoky Soul Food<br>帶有煙燻與炭火香氣的靈魂食物",
-        "Midnight Comfort<br>藏在巷弄裡的深夜碳水安慰",
-        "Elegant Bites<br>需要花時間慢慢咀嚼的精緻感",
-        "Street Chaos<br>會讓雙手沾滿醬汁的街頭小吃",
-        "Spicy Awakening<br>喚醒感官的辛香與熱氣",
-        "Ocean's Whisper<br>帶有海風鹹味的純粹鮮甜"
-    ];
-
-    const blindOrders = [
-        "Rule / 閉上眼，隨機點菜單上的第二項與第五項。",
-        "Rule / 點一道你們從來沒吃過，甚至唸不出名字的料理。",
-        "Rule / 讓老闆或服務生為你們決定今晚的主食。",
-        "Rule / 今晚不點主餐，只用前菜、小點與甜點填滿胃口。",
-        "Rule / 尋找菜單上最奇怪的組合，並勇敢地給它一次機會。"
-    ];
-
-    const encounters = [
-        "在等待餐點的空檔，放下手機。安靜地觀察對方的眼睛，直到第一道菜上桌。",
-        "點一杯你們平時絕對不會點的飲品或酒水，然後互相交換喝一口。",
-        "為彼此紀錄下品嚐第一口食物時，最真實、沒有防備的表情。",
-        "這頓飯的最後十分鐘，我們只談論夢想、顯化與未來，不談論日常瑣事。"
-    ];
-
-    const oracleCards = [
-        { name: "The Bouquet (花束)", text: "美好的事物正在發酵。這頓餐點將為你們帶來意想不到的愉悅與視覺饗宴。" },
-        { name: "The Fish (魚)", text: "豐盛與流動。今晚的選擇將完美填補你們身體與靈魂的渴望，享受富足感吧。" },
-        { name: "The Sun (太陽)", text: "充滿活力的能量。這份味覺體驗將為你們一掃近日的疲憊，帶來靈魂的溫暖。" },
-        { name: "The Letter (信件)", text: "留意餐桌上的細節或店家的佈置，宇宙正透過某句標語或菜單上的文字給你們提示。" }
-    ];
-
-    const photoVibes = [
-        "利用餐廳的低光源，開啟 Dazz Cam 的濾鏡，捕捉餐具與玻璃杯邊緣的曖昧反光。",
-        "不要拍食物的全貌。試著用特寫鏡頭，記錄下 WADE 拿起酒杯或刀叉時的手部線條。",
-        "尋找店內最有趣的光影角落，拍一張帶有王家衛電影氛圍的失焦人像。",
-        "開啟閃光燈，用最直接、生猛的底片視角，拍下盤子裡食物被消滅一半的真實模樣。"
-    ];
-
-    let currentJourney = {}; 
-
-    function startRolling() {
-        const destBox = document.getElementById('result');
-        const badge = document.getElementById('duration-badge');
-        const missionBox = document.getElementById('mission-box');
-        const editorialDetails = document.getElementById('editorial-details');
-        const dispatchBtn = document.getElementById('dispatch-btn');
-        const btn = document.querySelector('.draw-btn');
-
-        badge.style.display = "none"; missionBox.style.display = "none"; 
-        editorialDetails.style.display = "none"; dispatchBtn.style.display = "none";
-        btn.disabled = true; destBox.style.color = "#ccc";
-
-        let counter = 0;
-        
-        let rollInterval = setInterval(() => {
-            const randomFlavor = flavorProfiles[Math.floor(Math.random() * flavorProfiles.length)];
-            destBox.innerHTML = randomFlavor.split("<br>")[0];
-            counter++;
-
-            if (counter > 20) {
-                clearInterval(rollInterval);
-                finishDraw();
+        window.onload = () => {
+            document.getElementById('regions-count').innerText = visitedPlaces.length;
+            if (visitedPlaces.length > 0) {
+                document.getElementById('archive-section').style.display = 'block';
+                renderJournal();
             }
-        }, 65);
-    }
-
-    function finishDraw() {
-        const finalFlavor = flavorProfiles[Math.floor(Math.random() * flavorProfiles.length)];
-        const finalRule = blindOrders[Math.floor(Math.random() * blindOrders.length)];
-        const mission = encounters[Math.floor(Math.random() * encounters.length)];
-        const card = oracleCards[Math.floor(Math.random() * oracleCards.length)];
-        const vibe = photoVibes[Math.floor(Math.random() * photoVibes.length)];
-
-        document.getElementById('result').style.color = "var(--vogue-red)"; 
-        document.getElementById('result').innerHTML = finalFlavor; 
-        
-        document.getElementById('duration-badge').style.display = "block";
-        document.getElementById('duration-badge').innerHTML = `<strong>The Blind Order / 點餐規則：</strong><br>${finalRule}`;
-
-        document.getElementById('mission-box').innerHTML = `<div class="mission-title">Table Mission</div>${mission}`;
-        document.getElementById('mission-box').style.display = "block";
-
-        document.getElementById('oracle-card').innerHTML = `<strong>The Oracle Draw / 宇宙顯化牌卡：${card.name}</strong>${card.text}`;
-        document.getElementById('lens-vibe').innerHTML = `<strong>The Lens Vibe / 編輯台光影提示：</strong>${vibe}`;
-        document.getElementById('editorial-details').style.display = "flex";
-
-        document.getElementById('dispatch-btn').style.display = "block";
-        document.querySelector('.draw-btn').disabled = false;
-        document.querySelector('.draw-btn').innerText = "Re-Roll Cravings";
-
-        currentJourney = {
-            date: new Date().toLocaleDateString('zh-TW'),
-            flavor: finalFlavor.replace("<br>", " - "),
-            rule: finalRule,
-            mission: mission,
-            cardName: card.name,
-            vibe: vibe
         };
-    }
 
-    function dispatchJourney() {
-        const btn = document.getElementById('dispatch-btn');
-        const loader = document.getElementById('loader');
-        const WEBHOOK_URL = "YOUR_GAS_WEBHOOK_URL_HERE"; 
-        
-        btn.style.display = "none";
-        loader.style.display = "block";
-
-        if(WEBHOOK_URL === "YOUR_GAS_WEBHOOK_URL_HERE") {
+        function unfold() {
+            document.getElementById('prologue').style.opacity = '0';
+            document.getElementById('unfold-btn').style.display = 'none';
             setTimeout(() => {
-                loader.innerText = "✓ Dispatched to LINE & Saved to Vault.";
-                loader.style.color = "#8b0000";
-            }, 1500);
-            return;
+                document.getElementById('prologue').style.display = 'none';
+                document.getElementById('map-core').style.display = 'block';
+                document.getElementById('action-btns').style.display = 'flex';
+                setTimeout(() => { document.getElementById('map-core').style.opacity = '1'; }, 50);
+            }, 1000);
         }
 
-        fetch(WEBHOOK_URL, { method: "POST", body: JSON.stringify(currentJourney) })
-        .then(response => response.json())
-        .then(data => { loader.innerText = "✓ Dispatched to LINE & Saved to Vault."; loader.style.color = "#8b0000"; })
-        .catch(error => { loader.innerText = "✕ Sync failed. But the taste remains."; });
-    }
-</script>
+        function roll() {
+            if (isRolling) return;
+            isRolling = true;
+            
+            const btn = document.getElementById('roll-btn');
+            btn.disabled = true; 
+            btn.innerText = "CONSULTING THE UNIVERSE..."; 
 
+            const resultEl = document.getElementById('result');
+            const missionBox = document.getElementById('mission-box');
+            const checkInSection = document.getElementById('check-in-section');
+            const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
+            
+            if (pool.length === 0) { 
+                resultEl.innerText = "All Tasted."; 
+                btn.innerText = "DRAW INTUITION";
+                btn.disabled = false;
+                isRolling = false;
+                return; 
+            }
+
+            checkInSection.style.display = "none";
+
+            // 動畫階段：快速洗牌 5 個元素
+            resultEl.style.color = "#888"; 
+            
+            let rollInterval = setInterval(() => {
+                resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
+                
+                missionBox.innerHTML = `
+                    <div class="mission-item">
+                        <div class="mission-label">CUISINE / 吃什麼</div>
+                        <div class="mission-text" style="color:#666;">${cuisines[Math.floor(Math.random() * cuisines.length)]}</div>
+                    </div>
+                    <div class="mission-item">
+                        <div class="mission-label">ORDER / 怎麼點</div>
+                        <div class="mission-text" style="color:#666;">${orderings[Math.floor(Math.random() * orderings.length)]}</div>
+                    </div>
+                    <div class="mission-item">
+                        <div class="mission-label">CHALLENGE / 互動任務</div>
+                        <div class="mission-text" style="color:#666;">${challenges[Math.floor(Math.random() * challenges.length)]}</div>
+                    </div>
+                    <div class="mission-item">
+                        <div class="mission-label">DIALOGUE / 餐桌對話</div>
+                        <div class="mission-text" style="color:#666;">${dialogues[Math.floor(Math.random() * dialogues.length)]}</div>
+                    </div>
+                `;
+            }, 80);
+
+            // 揭曉階段
+            setTimeout(() => {
+                clearInterval(rollInterval);
+                resultEl.style.color = "var(--white)";
+                
+                currentResult = pool[Math.floor(Math.random() * pool.length)];
+                const rCuisine = cuisines[Math.floor(Math.random() * cuisines.length)];
+                const rOrder = orderings[Math.floor(Math.random() * orderings.length)];
+                const rChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+                const rDialogue = dialogues[Math.floor(Math.random() * dialogues.length)];
+                
+                missionBox.innerHTML = `
+                    <div class="mission-item">
+                        <div class="mission-label">CUISINE / 吃什麼</div>
+                        <div class="mission-text">${rCuisine}</div>
+                    </div>
+                    <div class="mission-item">
+                        <div class="mission-label">ORDER / 怎麼點</div>
+                        <div class="mission-text">${rOrder}</div>
+                    </div>
+                    <div class="mission-item">
+                        <div class="mission-label">CHALLENGE / 互動任務</div>
+                        <div class="mission-text">${rChallenge}</div>
+                    </div>
+                    <div class="mission-item">
+                        <div class="mission-label">DIALOGUE / 餐桌對話</div>
+                        <div class="mission-text" style="color:var(--gold); font-style:italic;">"${rDialogue}"</div>
+                    </div>
+                `;
+                
+                // 儲存紀錄用的文字排版
+                currentLogEntry = `
+                    <div><span style="color:#888;">[CUISINE]</span> ${rCuisine}</div>
+                    <div><span style="color:#888;">[ORDER]</span> ${rOrder}</div>
+                    <div><span style="color:#888;">[CHALLENGE]</span> ${rChallenge}</div>
+                    <div style="margin-top:4px; color:var(--gold);"><strong>[DIALOGUE]</strong> "${rDialogue}"</div>
+                `;
+                
+                resultEl.innerText = currentResult;
+                checkInSection.style.display = "block";
+                
+                btn.innerText = "Draw Intuition";
+                btn.disabled = false;
+                isRolling = false;
+            }, 1500);
+        }
+
+        function recordPlace() {
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            const formattedDate = `${yyyy}.${mm}.${dd}`;
+
+            const newRecord = { name: currentResult, mission: currentLogEntry, date: formattedDate };
+            visitedPlaces.unshift(newRecord);
+            localStorage.setItem('nomadic_vol02_data', JSON.stringify(visitedPlaces));
+            location.reload();
+        }
+
+        function renderJournal() {
+            const listEl = document.getElementById('journal-list');
+            listEl.innerHTML = visitedPlaces.map(item => `
+                <div class="journal-item">
+                    <div class="journal-date">${item.date}</div>
+                    <div class="journal-place">${item.name}</div>
+                    <div class="journal-mission">${item.mission}</div>
+                </div>
+            `).join('');
+        }
+
+        function clearFootprints() {
+            if (confirm("確定要永久重置 Vol. 02 的所有餐桌紀錄嗎？")) {
+                localStorage.removeItem('nomadic_vol02_data'); location.reload();
+            }
+        }
+    </script>
 </body>
 </html>
