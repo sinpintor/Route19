@@ -44,8 +44,10 @@
         
         .mission-box { display: flex; flex-direction: column; gap: 15px; }
         .mission-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+        
+        /* 將 TASK 與 CHALLENGE 的視覺比例統一，皆使用 #eee 明亮色 */
         .mission-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; margin-bottom: 15px;}
-        .challenge-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: var(--grey); line-height: 1.6; font-weight: 300; }
+        .challenge-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; }
 
         .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; }
@@ -258,10 +260,10 @@
                     </div>
                 `;
                 
-                // 儲存紀錄用的文字
+                // 儲存紀錄用的文字 (統一標籤顏色與字重)
                 currentLogEntry = `
                     <div style="margin-bottom: 4px;"><strong>[TASK]</strong> ${randomTask}</div>
-                    <div><strong style="color: #888;">[CHALLENGE]</strong> ${randomChallenge}</div>
+                    <div><strong>[CHALLENGE]</strong> ${randomChallenge}</div>
                 `;
                 
                 resultEl.innerText = currentResult;
