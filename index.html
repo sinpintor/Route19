@@ -8,7 +8,7 @@
     <style>
         :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #777777; }
 
-        /* 隱藏捲軸但保持滑動 */
+        /* 隱藏捲軸魔法 */
         ::-webkit-scrollbar { display: none; }
         body, html { 
             margin: 0; padding: 0; width: 100%; min-height: 100%;
@@ -17,29 +17,29 @@
             overflow-x: hidden; scrollbar-width: none;
         }
 
-        /* 底片質感濾鏡 */
+        /* 底片質感噪點 */
         .noise {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9999;
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E');
         }
 
-        /* 標題區：攝影師的構圖思維 */
+        /* 刊頭設計 */
         .header {
-            text-align: center; padding: 70px 20px 40px 20px;
-            letter-spacing: 0.5em; font-size: 0.65rem; text-transform: uppercase;
+            text-align: center; padding: 80px 20px 40px 20px;
+            letter-spacing: 0.4em; font-size: 0.6rem; text-transform: uppercase;
             font-weight: 200; color: var(--grey);
         }
         .header strong {
-            font-family: 'Playfair Display', serif; font-size: 2rem;
-            color: var(--white); display: block; margin-bottom: 15px;
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            color: var(--white); display: block; margin-bottom: 12px;
             font-weight: 400; letter-spacing: 0.1em; font-style: italic;
         }
 
-        /* 3x2 藝廊網格 */
+        /* 藝廊格線 (手機版會自動變為單欄) */
         .gallery {
             display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 20px; padding: 0 20px 120px 20px;
+            gap: 25px; padding: 0 25px 120px 25px;
             max-width: 900px; margin: 0 auto;
         }
 
@@ -47,47 +47,49 @@
             position: relative; aspect-ratio: 3 / 4; overflow: hidden;
             text-decoration: none; color: var(--white);
             display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 20px; box-sizing: border-box;
+            padding: 25px; box-sizing: border-box;
         }
 
         .card-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
             transition: transform 1.5s cubic-bezier(0.2, 1, 0.3, 1), filter 1s ease;
-            z-index: 1; filter: brightness(0.5) grayscale(40%);
+            z-index: 1; filter: brightness(0.5) grayscale(20%);
         }
         
         .card:hover .card-bg { transform: scale(1.08); filter: brightness(0.7) grayscale(0%); }
 
+        /* 漸層遮罩 */
         .card::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 2;
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 65%;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); z-index: 2;
         }
 
-        .card-content { position: relative; z-index: 3; text-align: center; }
+        .card-content { position: relative; z-index: 3; text-align: center; transition: transform 0.6s ease; }
+        .card:hover .card-content { transform: translateY(-8px); }
 
-        .vol { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; margin-bottom: 8px; }
-        .title { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #ccc; margin-bottom: 5px; font-weight: 300; }
-        .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; color: #999; font-weight: 200; letter-spacing: 0.1em; }
+        .vol { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-style: italic; margin-bottom: 10px; }
+        .title { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; font-weight: 300; }
+        .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #888; font-weight: 200; letter-spacing: 0.15em; }
 
-        /* 底部金句跑馬燈 */
+        /* 底部跑馬燈：公路金句 */
         .footer-marquee {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);
-            padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.1); z-index: 100;
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px);
+            padding: 18px 0; border-top: 1px solid rgba(255,255,255,0.05); z-index: 100;
         }
         .marquee-inner {
             display: inline-block; white-space: nowrap;
-            animation: move 40s linear infinite; font-size: 0.6rem;
-            letter-spacing: 0.3em; color: var(--grey); text-transform: uppercase;
+            animation: move 45s linear infinite; font-size: 0.6rem;
+            letter-spacing: 0.35em; color: var(--grey); text-transform: uppercase;
         }
         @keyframes move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* 手機版適配：單欄顯示增加精緻感 */
-        @media (max-width: 600px) {
+        /* 手機適配 */
+        @media (max-width: 650px) {
             .gallery { grid-template-columns: 1fr; gap: 30px; }
+            .header strong { font-size: 1.8rem; }
             .card { max-width: 320px; margin: 0 auto; }
-            .header strong { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -97,7 +99,7 @@
 
     <div class="header">
         <strong>L'ÉVASION</strong>
-        The Ultimate Hexalogy
+        THE ARCHIVES COLLECTION
     </div>
 
     <div class="gallery">
@@ -138,7 +140,7 @@
         </a>
 
         <a href="vol_05.html" class="card">
-            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1518005020481-a68515605041?q=80&w=1000');"></div>
+            <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/15095997544125871261_0');"></div>
             <div class="card-content">
                 <div class="vol">Vol. 05</div>
                 <div class="title">The Vision Issue</div>
@@ -147,7 +149,7 @@
         </a>
 
         <a href="vol_06.html" class="card">
-            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514525253361-b83f859b71c0?q=80&w=1000');"></div>
+            <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/2948395688518118017_0');"></div>
             <div class="card-content">
                 <div class="vol">Vol. 06</div>
                 <div class="title">The Night Issue</div>
@@ -158,7 +160,7 @@
 
     <div class="footer-marquee">
         <div class="marquee-inner">
-            NOT ALL THOSE WHO WANDER ARE LOST ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE ART OF US ✦ NOT ALL THOSE WHO WANDER ARE LOST ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE ART OF US ✦
+            NOT ALL THOSE WHO WANDER ARE LOST ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ L'ÉVASION : THE ART OF US ✦ NOT ALL THOSE WHO WANDER ARE LOST ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ SURRENDER CONTROL TO THE UNIVERSE ✦
         </div>
     </div>
 
