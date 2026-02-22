@@ -28,34 +28,35 @@
 
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 45vh; margin: 40px 0; }
 
-        #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
-        .narrative-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: var(--gold); margin-bottom: 35px; letter-spacing: 0.1em; }
-        
-        /* 敘事與任務：調整為置左排版 */
-        .story-text, .mission-box { 
-            max-width: 280px; margin: 0 auto; 
-            border-left: 1px solid var(--gold); padding-left: 20px; 
-            text-align: left; 
+        /* 統一中文敘述區塊：加左邊框並置左對齊 */
+        .content-block {
+            width: 100%; max-width: 320px; margin: 0 auto;
+            border-left: 1px solid var(--gold); padding-left: 20px;
+            text-align: left; box-sizing: border-box;
         }
 
-        .story-text { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: #eee; line-height: 2.5; font-weight: 300; letter-spacing: 0.05em; }
+        #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
+        .narrative-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: var(--gold); margin-bottom: 25px; letter-spacing: 0.1em; }
+        .story-text { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: #eee; line-height: 2.2; font-weight: 300; letter-spacing: 0.05em; }
         .story-text span { display: block; margin-bottom: 12px; }
 
         #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
-        #result { font-family: 'Noto Serif TC', serif; font-size: 2.6rem; font-weight: 500; margin-bottom: 25px; letter-spacing: 0.05em; text-align: center; }
+        #result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 25px; letter-spacing: 0.05em; }
         
-        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: var(--gold); font-style: italic; line-height: 1.8; margin-bottom: 15px; opacity: 0.9; }
-        #photo-challenge { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: var(--grey); letter-spacing: 0.1em; border-top: 1px solid rgba(212, 180, 131, 0.2); padding-top: 15px; line-height: 1.6; }
+        .mission-box { display: flex; flex-direction: column; gap: 20px; }
+        .mission-item { display: flex; flex-direction: column; gap: 8px; }
+        .mission-task { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: var(--gold); line-height: 1.6; opacity: 0.9; font-weight: 500;}
+        .photo-challenge { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: var(--grey); letter-spacing: 0.1em; line-height: 1.6; }
 
-        .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; }
+        .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; }
-        #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; margin-bottom: 20px; }
+        #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; margin-bottom: 20px; text-align: center;}
 
         .archive-section { width: 100%; max-width: 500px; margin-top: 80px; text-align: left; border-top: 1px solid #222; padding-top: 40px; }
         .journal-item { margin-bottom: 35px; border-left: 1px solid var(--gold); padding-left: 20px; }
         .journal-date { font-size: 0.55rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; }
         .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin: 8px 0; font-weight: 500; }
-        .journal-mission { font-size: 0.75rem; color: #888; font-weight: 300; line-height: 1.6; }
+        .journal-mission { font-size: 0.75rem; color: #aaa; font-weight: 300; line-height: 1.6; }
         .clear-btn { margin-top: 40px; background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
@@ -72,7 +73,7 @@
         </header>
 
         <div class="display-area">
-            <div id="prologue">
+            <div id="prologue" class="content-block">
                 <div class="narrative-title">The Romantic Nomadic.</div>
                 <div class="story-text">
                     <span>有些靈魂註定無法被標記在靜止的座標上。</span>
@@ -82,11 +83,12 @@
                 </div>
             </div>
 
-            <div id="map-core">
+            <div id="map-core" class="content-block">
                 <div id="result">The Unknown</div>
-                <div class="mission-box">
-                    <div id="mission-task">Seek your destination.</div>
-                    <div id="photo-challenge" style="display:none;"></div>
+                <div class="mission-box" id="mission-box">
+                    <div class="mission-item">
+                        <div class="mission-task">Seek your destination.</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,7 +136,7 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-// 100 組 VOGUE 任務與搞怪浪漫挑戰
+        // 100 組 VOGUE 任務與搞怪浪漫挑戰
         const vogueMissions = [
             { task: "拍下對方在車窗玻璃上的倒影，背景是移動的風景。", challenge: "拍一張兩人在公路旁影子正在接吻的照片。" },
             { task: "尋找路邊一塊生鏽或斑駁的招牌，紀錄時間的顆粒感。", challenge: "利用車外後照鏡，拍下兩人在車內擠眉弄眼的合照。" },
@@ -262,24 +264,42 @@
 
         function roll() {
             const resultEl = document.getElementById('result');
-            const taskEl = document.getElementById('mission-task');
-            const challengeEl = document.getElementById('photo-challenge');
+            const missionBox = document.getElementById('mission-box');
             const checkInSection = document.getElementById('check-in-section');
             const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
             
             if (pool.length === 0) { resultEl.innerText = "All Explored."; return; }
 
             resultEl.style.opacity = 0;
+            missionBox.style.opacity = 0;
+            
             setTimeout(() => {
+                // 1. 抽取地點
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
-                const pair = vogueMissions[Math.floor(Math.random() * vogueMissions.length)];
                 
-                currentLogEntry = `${pair.task} / ${pair.challenge}`;
+                // 2. 隨機抽取 3 個不重複的任務
+                let shuffled = [...vogueMissions].sort(() => 0.5 - Math.random()).slice(0, 3);
+                
+                let missionHTML = '';
+                let logText = '';
+                
+                shuffled.forEach((m, idx) => {
+                    missionHTML += `
+                    <div class="mission-item">
+                        <div class="mission-task">Task 0${idx + 1}. ${m.task}</div>
+                        <div class="photo-challenge">Challenge: ${m.challenge}</div>
+                    </div>`;
+                    
+                    logText += `<div style="margin-bottom: 6px;"><strong>T0${idx + 1}.</strong> ${m.task}<br><span style="color: #666;">C0${idx + 1}. ${m.challenge}</span></div>`;
+                });
+                
+                // 更新畫面與資料紀錄
+                currentLogEntry = logText;
                 resultEl.innerText = currentResult;
-                taskEl.innerText = pair.task;
-                challengeEl.innerText = pair.challenge;
-                challengeEl.style.display = "block";
+                missionBox.innerHTML = missionHTML;
+                
                 resultEl.style.opacity = 1;
+                missionBox.style.opacity = 1;
                 checkInSection.style.display = "block";
             }, 300);
         }
@@ -297,7 +317,7 @@
                 <div class="journal-item">
                     <div class="journal-date">${item.date}</div>
                     <div class="journal-place">${item.name}</div>
-                    <div class="journal-mission">${item.mission}</div>
+                    <div class="journal-mission" style="margin-top: 10px;">${item.mission}</div>
                 </div>
             `).join('');
         }
