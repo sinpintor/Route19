@@ -68,9 +68,12 @@
                 <p class="page-desc">關掉地圖上的星級評分，把今天的去向交給一張牌卡。換上一套取悅自己的衣服，搖下車窗，去赴一場不在計畫內的約。</p>
             </div>
             
-            <div class="channel-bar">
-                <span>正在收聽的公路頻道：<span id="current-channel-display" class="channel-name">FM 19.0 漫遊波段</span></span>
-                <button class="btn-switch-channel" onclick="changeChannel()">調頻</button>
+            <div class="channel-wrapper">
+                <div class="channel-bar">
+                    <span class="channel-label">正在收聽的公路頻道：</span>
+                    <span id="current-channel-display" class="channel-name">FM 19.0 漫遊波段</span>
+                    <button class="btn-switch-channel" onclick="changeChannel()">調頻</button>
+                </div>
             </div>
 
             <div class="temp-selector">
@@ -99,7 +102,7 @@
             <div id="mission-panel" class="mission-panel">
                 <div class="mission-item"><span class="m-header"><strong>01</strong> 漫遊視角 Where to look</span><div class="m-content" id="m-action"></div></div>
                 <div class="mission-item"><span class="m-header"><strong>02</strong> 沿途風味 What to taste</span><div class="m-content" id="m-food"></div></div>
-                <div class="mission-item"><span class="m-header"><strong>03</strong> 編輯私服 OOTD</span><div class="m-content" id="m-style"></div></div>
+                <div class="mission-item"><span class="m-header"><strong>03</strong> 編輯私服 Outfit of the day</span><div class="m-content" id="m-style"></div></div>
                 
                 <button class="btn-vogue btn-primary" id="btn-save" onclick="manualSave()">把這趟旅程收進護照</button>
                 <button class="btn-vogue" style="border-color: var(--active-color); color: var(--active-color);" onclick="generateIGStory()">列印專屬限動海報</button>
