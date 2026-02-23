@@ -14,7 +14,7 @@ body {
     overflow-x: hidden;
 }
 
-/* 1. 底片顆粒背景 (Film Grain) */
+/* 底片顆粒背景 */
 .noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://www.transparenttextures.com/patterns/stardust.png');
@@ -48,12 +48,12 @@ nav {
 /* 內文描述 (靠左對齊) */
 .page-desc {
     font-family: 'Noto Serif TC', serif; font-size: 0.9rem; color: #bbb;
-    text-align: left; /* 關鍵修改：靠左 */
+    text-align: left;
     line-height: 1.8; margin: 0 auto 40px; letter-spacing: 0.05em;
-    padding: 0 5px; /* 手機上稍微內縮一點 */
+    padding: 0 5px;
 }
 
-/* 頻道獨立框 (膠囊造型) */
+/* 頻道獨立框 */
 .channel-wrapper { text-align: center; margin-bottom: 30px; }
 .channel-bar {
     display: inline-flex; align-items: center; justify-content: center;
@@ -125,7 +125,7 @@ nav {
 .j-index { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #333; margin-bottom: 5px; }
 .j-district { font-size: 1.4rem; font-weight: 700; display: block; margin-bottom: 15px; color: var(--white); letter-spacing: 0.1em; }
 .j-row-info { font-size: 0.85rem; color: #aaa; margin-bottom: 6px; line-height: 1.6; }
-/* 讓標籤寬度夠長，對齊 Outfit of the day */
+/* OOTD 標籤對齊 */
 .j-row-info strong { display: inline-block; width: 140px; font-weight: 400; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
 .about-section { margin-bottom: 50px; }
@@ -134,27 +134,71 @@ nav {
 
 .state-message { text-align: center; color: #666; font-size: 0.8rem; padding: 40px 0; letter-spacing: 0.1em; }
 
-/* IG 海報 */
+/* ================= IG 海報設計 (重構版) ================= */
 .ig-poster {
-    position: fixed; left: -9999px; width: 1080px; height: 1920px; background: #050505; color: white; padding: 100px 80px;
+    position: fixed; left: -9999px; width: 1080px; height: 1920px; background: #050505; color: white; padding: 120px 80px;
     display: flex; flex-direction: column; justify-content: space-between; font-family: 'Montserrat', 'Noto Serif TC', serif;
 }
-.poster-frame { height: 100%; border: 2px solid #333; padding: 60px; display: flex; flex-direction: column; position: relative; }
-.poster-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #333; padding-bottom: 40px; margin-bottom: 60px; }
+
+.poster-frame { 
+    height: 100%; border: 3px solid #333; padding: 60px; 
+    display: flex; flex-direction: column; position: relative; 
+}
+
+.poster-header { 
+    display: flex; justify-content: space-between; align-items: flex-end; 
+    border-bottom: 2px solid #333; padding-bottom: 40px; margin-bottom: 0; flex-shrink: 0;
+}
 .poster-vol { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--active-color); }
-.poster-brand { font-size: 1rem; letter-spacing: 0.5em; text-transform: uppercase; }
-.poster-body { flex-grow: 1; }
-.poster-combo-box { display: flex; align-items: center; gap: 30px; margin-bottom: 30px; color: #888; font-size: 1.2rem; letter-spacing: 0.2em; }
+.poster-brand { font-size: 1.2rem; letter-spacing: 0.5em; text-transform: uppercase; }
+
+/* 海報中段：負責撐開空間與置中 */
+.poster-body { 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; /* 垂直置中 */
+    gap: 80px; /* 上下區塊的間距 */
+}
+
+/* 上半部：卡牌與地點 (置中) */
+.poster-top-section { 
+    text-align: center; 
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.poster-combo-box { 
+    display: flex; align-items: center; justify-content: center; gap: 30px; 
+    margin-bottom: 50px; color: #888; font-size: 1.5rem; letter-spacing: 0.2em; width: 100%;
+}
 .poster-combo-cross { color: var(--active-color); font-size: 1.5rem; }
-.poster-loc { font-size: 4.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 60px; letter-spacing: 0.1em; font-family: 'Noto Serif TC', serif; }
-.poster-divider { width: 60px; height: 4px; background: var(--active-color); margin-bottom: 80px; }
-.poster-mission .pm-item { margin-bottom: 50px; }
-.pm-title { display: block; font-size: 1rem; color: #666; margin-bottom: 15px; letter-spacing: 0.2em; text-transform: uppercase; }
-.pm-num { color: var(--active-color); font-family: 'Playfair Display', serif; margin-right: 10px; font-style: italic; }
-.pm-desc { font-size: 1.4rem; line-height: 1.5; color: #ddd; font-weight: 300; }
-.poster-footer { border-top: 1px solid #333; padding-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
-.poster-date { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #888; }
-.poster-ig { font-size: 1.2rem; letter-spacing: 0.2em; }
+
+/* 地點名稱放大並置中 */
+.poster-loc { 
+    font-size: 5.5rem; font-weight: 700; line-height: 1.2; 
+    margin-bottom: 60px; letter-spacing: 0.1em; 
+    font-family: 'Noto Serif TC', serif; text-align: center;
+}
+
+.poster-divider { width: 80px; height: 4px; background: var(--active-color); margin: 0 auto; }
+
+/* 下半部：任務清單 (填補下方空間) */
+.poster-mission { 
+    display: flex; flex-direction: column; gap: 60px; /* 拉開任務間距 */
+    padding: 0 20px;
+}
+
+.pm-item { margin-bottom: 0; }
+.pm-title { display: block; font-size: 1.1rem; color: #666; margin-bottom: 20px; letter-spacing: 0.2em; text-transform: uppercase; }
+.pm-num { color: var(--active-color); font-family: 'Playfair Display', serif; margin-right: 15px; font-style: italic; font-size: 1.2rem; }
+.pm-desc { font-size: 1.6rem; line-height: 1.6; color: #ddd; font-weight: 300; }
+
+.poster-footer { 
+    border-top: 2px solid #333; padding-top: 40px; 
+    display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0;
+}
+.poster-date { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #888; }
+.poster-ig { font-size: 1.4rem; letter-spacing: 0.2em; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -170,7 +214,6 @@ nav {
     100% { opacity: 0; } 
 }
 
-/* 手機版優化：字體稍微縮小，確保單行不換行 */
 @media (max-width: 768px) {
     .vogue-title { font-size: 2.5rem; }
     .loc-display { font-size: 1.8rem; }
