@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Route 19: Wade & Cloudy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,800&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Route19: 城市靈感指南</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;1,800&family=Noto+Serif+TC:wght@300;500;600;700&display=swap" rel="stylesheet">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         :root { --black: #0a0a0a; --white: #ffffff; --grey: #888888; --active-color: #FFD700; }
@@ -20,7 +20,7 @@
         .content-wrapper { width: 100%; max-width: 400px; display: flex; flex-direction: column; }
 
         .page-title-box { text-align: center; width: 100%; margin-bottom: 40px; }
-        .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.6rem; font-weight: 800; color: var(--active-color); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 15px; }
+        .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; font-weight: 800; color: var(--active-color); letter-spacing: 0.15em; margin-bottom: 15px; }
         .page-desc { font-size: 0.75rem; color: #888; line-height: 1.8; text-align: left; font-weight: 300; letter-spacing: 0.05em; border-left: 1px solid #333; padding-left: 15px; }
         
         .temp-selector { display: flex; gap: 8px; margin-bottom: 30px; width: 100%; }
@@ -54,18 +54,29 @@
         .j-row-info { margin-bottom: 15px; font-size: 0.85rem; color: #aaa; line-height: 1.6; font-weight: 300; }
         .j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.1em; margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
 
-        /* IG 限動海報專屬隱藏區塊 */
-        .ig-poster { position: fixed; left: -9999px; top: 0; width: 540px; height: 960px; background: var(--black); color: var(--white); display: flex; flex-direction: column; justify-content: space-between; padding: 70px 45px; box-sizing: border-box; z-index: -1; }
-        .poster-noise { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.08"/%3E%3C/svg%3E'); pointer-events: none; z-index: 0; }
-        .poster-header { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 0.2em; color: var(--grey); border-bottom: 1px solid #333; padding-bottom: 15px; z-index: 1; }
-        .poster-body { flex: 1; display: flex; flex-direction: column; justify-content: center; z-index: 1; }
-        .poster-combo { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--active-color); letter-spacing: 0.1em; margin-bottom: 15px; font-style: italic; }
-        .poster-loc { font-family: 'Noto Serif TC', serif; font-size: 54px; font-weight: 600; line-height: 1.2; margin-bottom: 40px; }
-        .poster-divider { width: 40px; height: 2px; background: var(--active-color); margin-bottom: 40px; }
+        /* ================= IG 限動海報專屬樣式 ================= */
+        .ig-poster { position: fixed; left: -9999px; top: 0; width: 540px; height: 960px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; z-index: -1; overflow: hidden; }
+        
+        /* 動態活潑背景層 */
+        .poster-dynamic-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        
+        /* 玻璃面板：確保文字不受背景干擾 */
+        .poster-glass { position: relative; width: 100%; height: 100%; background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; justify-content: space-between; padding: 50px 35px; box-sizing: border-box; z-index: 1; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        
+        .poster-header { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 0.2em; color: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 15px; }
+        .poster-brand { font-weight: 800; color: #fff; }
+        
+        .poster-body { flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 20px; }
+        .poster-combo { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--active-color); letter-spacing: 0.1em; margin-bottom: 15px; font-style: italic; }
+        .poster-loc { font-family: 'Noto Serif TC', serif; font-size: 52px; font-weight: 700; line-height: 1.2; margin-bottom: 35px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .poster-divider { width: 50px; height: 3px; background: var(--active-color); margin-bottom: 35px; }
+        
         .pm-item { margin-bottom: 30px; }
-        .pm-title { display: block; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.2em; color: var(--active-color); margin-bottom: 10px; font-weight: 600; }
-        .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 18px; line-height: 1.6; color: #eee; font-weight: 300; }
-        .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.2em; color: #888; z-index: 1; }
+        .pm-title { display: block; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.25em; color: var(--active-color); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+        .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.9); font-weight: 300; }
+        
+        .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); }
+        .poster-hashtag { color: #fff; font-weight: 600; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -80,41 +91,44 @@
     </nav>
 
     <div id="poster-template" class="ig-poster">
-        <div class="poster-noise"></div>
-        <div class="poster-header">
-            <span class="poster-vol">VOL. 19</span>
-            <span class="poster-brand">WADE & CLOUDY</span>
-        </div>
-        <div class="poster-body">
-            <div class="poster-combo" id="poster-combo"></div>
-            <div class="poster-loc" id="poster-loc"></div>
-            <div class="poster-divider"></div>
-            <div class="poster-mission">
-                <div class="pm-item">
-                    <span class="pm-title">LOCATION</span>
-                    <div class="pm-desc" id="poster-action"></div>
-                </div>
-                <div class="pm-item">
-                    <span class="pm-title">TASTE</span>
-                    <div class="pm-desc" id="poster-food"></div>
-                </div>
-                <div class="pm-item">
-                    <span class="pm-title">STYLING</span>
-                    <div class="pm-desc" id="poster-style"></div>
+        <div class="poster-dynamic-bg" id="poster-bg"></div>
+        
+        <div class="poster-glass">
+            <div class="poster-header">
+                <span class="poster-vol">VOL. 19</span>
+                <span class="poster-brand">Route19</span>
+            </div>
+            <div class="poster-body">
+                <div class="poster-combo" id="poster-combo"></div>
+                <div class="poster-loc" id="poster-loc"></div>
+                <div class="poster-divider"></div>
+                <div class="poster-mission">
+                    <div class="pm-item">
+                        <span class="pm-title">Location</span>
+                        <div class="pm-desc" id="poster-action"></div>
+                    </div>
+                    <div class="pm-item">
+                        <span class="pm-title">Taste</span>
+                        <div class="pm-desc" id="poster-food"></div>
+                    </div>
+                    <div class="pm-item">
+                        <span class="pm-title">Styling</span>
+                        <div class="pm-desc" id="poster-style"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="poster-footer">
-            <span id="poster-date" class="poster-date"></span>
-            <span class="poster-hashtag">#WadeAndCloudy</span>
+            <div class="poster-footer">
+                <span id="poster-date" class="poster-date"></span>
+                <span class="poster-hashtag">#Route19</span>
+            </div>
         </div>
     </div>
 
     <div id="oracle" class="page active">
         <div class="content-wrapper">
             <div class="page-title-box">
-                <h1 class="vogue-title">Wade & Cloudy</h1>
-                <p class="page-desc">第十九號航線。將隨機的靈感指引，變成一場輕旅行。在台灣的某個角落，遇見屬於你的美好瞬間。</p>
+                <h1 class="vogue-title">Route19</h1>
+                <p class="page-desc">將隨機的靈感指引，變成一場輕旅行。在台灣的某個角落，遇見屬於你的美好瞬間。</p>
             </div>
             <div class="temp-selector">
                 <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">15°C↓ 微涼</button>
@@ -157,14 +171,14 @@
         <div class="content-wrapper">
             <div class="page-title-box">
                 <h1 class="vogue-title" style="color:#fff">City Editorial</h1>
-                <p class="page-desc">以城市為章節，收集你的每一次出發。Wade & Cloudy 的台灣生活誌。</p>
+                <p class="page-desc">以城市為章節，收集你的每一次出發。Route19 的台灣生活誌。</p>
             </div>
             <div id="editorial-list" style="width:100%;"></div>
         </div>
     </div>
 
     <script>
-        // 台灣縣市資料庫保持不變
+        // 台灣縣市資料庫
         const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑名鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
         const subjects = {
             1: { n: "太陽", loc: "陽光充足的開闊空地或廣場", color: "#FFD700" },
@@ -323,12 +337,17 @@
                 if (i > 25) {
                     clearInterval(timer);
                     const finalLoc = taiwanData[Math.floor(Math.random() * taiwanData.length)];
+                    
+                    // 確保兩張牌不重複的邏輯
                     const id1 = Math.floor(Math.random() * 36) + 1;
-                    const id2 = Math.floor(Math.random() * 36) + 1;
+                    let id2 = Math.floor(Math.random() * 36) + 1;
+                    while (id2 === id1) {
+                        id2 = Math.floor(Math.random() * 36) + 1;
+                    }
+                    
                     const s1 = subjects[id1];
                     const s2 = subjects[id2];
                     
-                    // 白話文且溫和的 Vogue 體
                     const m_a = `去一趟「${s1.loc}」，試著為那裡「${traits[id2]}」的氛圍按一次快門。`;
                     const m_f = `找一間風格「${id1 > 18 ? '豐富有層次' : '簡單舒服'}」的在地小店，享受屬於今天的味覺記憶。`;
                     const m_s = `今天出門，很適合換上「${outfits[currentTemp][Math.floor(Math.random()*20)]}」的裝扮。`;
@@ -342,6 +361,7 @@
                     document.getElementById('m-style').innerText = m_s;
                     document.body.style.setProperty('--active-color', s1.color);
                     panel.style.display = 'block';
+                    
                     currentRecord = { name: finalLoc, combo: `${s1.n.split(' ')[0]} ＋ ${s2.n.split(' ')[0]}`, m_action: m_a, m_food: m_f, m_style: m_s, color: s1.color, date: new Date().toLocaleDateString() };
                 }
             }, 60);
@@ -355,6 +375,16 @@
             alert("已成功收藏這個瞬間。");
             renderAll();
         }
+
+        // 定義一系列高質感、活潑的背景 (使用 CSS 漸層與 SVG 幾何圖形，避免 CORS 問題)
+        const vibrantBackgrounds = [
+            `url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" fill="%23ffffff" fill-opacity="0.1"/></svg>'), linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)`,
+            `url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10" fill="%23ffffff" fill-opacity="0.05"/></svg>'), radial-gradient(circle at 10% 20%, rgb(255, 131, 122) 0%, rgb(255, 204, 154) 90%)`,
+            `url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M0 30 L30 0 L60 30 L30 60 Z" fill="%23ffffff" fill-opacity="0.05"/></svg>'), linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)`,
+            `url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><circle cx="15" cy="15" r="14" stroke="%23ffffff" stroke-width="1" stroke-opacity="0.2" fill="none"/></svg>'), linear-gradient(135deg, #667eea 0%, #764ba2 100%)`,
+            `linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent), linear-gradient(to right, #fa709a 0%, #fee140 100%)`,
+            `radial-gradient(circle at 50% 50%, #fbc2eb 0%, #a6c1ee 100%)`
+        ];
 
         function generateIGStory() {
             if (!currentRecord) {
@@ -373,22 +403,27 @@
             const dateString = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
             document.getElementById('poster-date').innerText = dateString;
 
+            // 替換動態活潑的幾何/漸層背景
+            const randomBg = vibrantBackgrounds[Math.floor(Math.random() * vibrantBackgrounds.length)];
+            document.getElementById('poster-bg').style.background = randomBg;
+            document.getElementById('poster-bg').style.backgroundSize = "60px 60px, cover"; // 確保幾何圖形大小適中
+
             const posterTemplate = document.getElementById('poster-template');
             posterTemplate.style.setProperty('--active-color', currentRecord.color);
 
             // 2. 轉換圖片並下載
             setTimeout(() => {
                 html2canvas(posterTemplate, {
-                    scale: 2, 
-                    backgroundColor: "#0a0a0a",
-                    useCORS: true
+                    scale: 2, // 保持 IG 所需的高解析度
+                    useCORS: true,
+                    backgroundColor: null // 允許背景透明以顯示我們設計的背景
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `Route19_${currentRecord.name.replace(' ', '_')}.png`;
                     link.href = canvas.toDataURL('image/png');
                     link.click();
                 });
-            }, 100);
+            }, 150); // 稍微增加延遲確保字體和背景渲染完畢
         }
 
         function resetSystem() {
