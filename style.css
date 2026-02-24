@@ -177,7 +177,7 @@ nav {
 }
 .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: var(--white); font-weight: 300; }
 
-/* --- Passport Editorial (全新字體散文索引排版) --- */
+/* --- Passport Editorial (雜誌附錄無框線矩陣網格) --- */
 .progress-container-editorial { margin-bottom: 60px; text-align: center; }
 .progress-bar-bg-thin { width: 100%; height: 1px; background: #333; margin-bottom: 15px; }
 .progress-bar-fill-thin { height: 100%; background: var(--active-color); width: 0%; transition: width 1s ease; }
@@ -194,19 +194,21 @@ nav {
     font-size: 2rem; font-style: italic; color: var(--white); 
     margin: 0; letter-spacing: 0.1em; text-align: left; 
 }
+
+/* 矩陣網格目錄 (完美解決 2~4 字的長度差異) */
 .stamp-board-grouped { 
-    display: flex; flex-wrap: wrap; gap: 8px 12px; justify-content: flex-start; 
-    line-height: 1.8;
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); 
+    gap: 20px 10px; 
 }
 .stamp {
     padding: 0; border: none; background: transparent; 
-    font-size: 0.95rem; color: #444; transition: 0.4s ease; cursor: default;
-    font-family: 'Noto Serif TC', serif; letter-spacing: 0.1em;
+    font-size: 0.9rem; color: #444; transition: 0.4s ease; cursor: default;
+    font-family: 'Noto Serif TC', serif; letter-spacing: 0.15em;
+    text-align: left; /* 強制靠左對齊，形成完美垂直線 */
+    white-space: nowrap; /* 確保地名絕對不斷行 */
 }
-.stamp::after { content: '，'; color: #333; margin-left: 2px; }
-.stamp:last-child::after { content: ''; }
-.stamp.active { font-weight: 400; }
-.stamp.active::after { color: #444; text-shadow: none; } 
+.stamp.active { font-weight: 500; }
 
 .journal-list-editorial { border-top: 1px solid var(--line-color); }
 .journal-card { 
@@ -341,7 +343,7 @@ nav {
 .close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
 .close-btn:hover, .close-btn:active { color: var(--white); }
 
-/* RWD 手機版優化 */
+/* RWD 手機版優化 (加入橫向滑動、任務置中靠左與護照網格微調) */
 @media (max-width: 768px) {
     nav {
         justify-content: flex-start;
@@ -362,7 +364,7 @@ nav {
     .vogue-title { font-size: 3.2rem; }
     .loc-display-large { 
         font-size: 2.2rem; 
-        white-space: nowrap; 
+        white-space: nowrap; /* 強制文字與標點符號待在同一行 */
     }
     .tag-row-editorial { font-size: 1rem; }
     
@@ -374,13 +376,13 @@ nav {
     .mission-item-editorial { 
         flex-direction: column; 
         gap: 10px; 
-        align-items: center; 
+        align-items: center; /* 讓外層的數字置中 */
     }
     .m-body { 
         width: 100%; 
         display: flex; 
         flex-direction: column; 
-        align-items: center; 
+        align-items: center; /* 讓內層的英文標題置中 */
     }
     .m-num { 
         font-size: 3rem; 
@@ -392,7 +394,7 @@ nav {
         text-align: center; 
     }
     .m-content { 
-        text-align: left; 
+        text-align: left; /* 確保下方的中文任務內容維持靠左對齊 */
         width: 100%;
     }
 
@@ -405,4 +407,9 @@ nav {
     .j-index { font-size: 1.5rem; }
     .j-body { padding-left: 20px; }
     .j-district { font-size: 1.6rem; margin-bottom: 25px; }
+    
+    /* 手機版護照網格微調 */
+    .stamp-board-grouped { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 15px 5px; }
+    .stamp { font-size: 0.8rem; }
+    .stamp-county-title { text-align: center; }
 }
