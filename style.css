@@ -84,7 +84,7 @@ nav {
 .center-align .separator-line { margin-left: auto; margin-right: auto; }
 .center-align .page-desc { margin-left: auto; margin-right: auto; text-align: center; }
 
-/* --- 頻道排版 (全襯線體統一版) --- */
+/* --- 頻道排版 (全襯線體統一版 + 手機觸控支援) --- */
 .control-panel { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid var(--line-color); padding-bottom: 20px; }
 .channel-wrapper { 
     display: flex; flex-direction: column; align-items: flex-start; 
@@ -94,7 +94,6 @@ nav {
     display: flex; align-items: center; gap: 8px; margin-bottom: 6px; 
 }
 .meta-en { 
-    /* 統一改用 Playfair 襯線體，更具古典氣息 */
     font-family: 'Playfair Display', 'Noto Serif TC', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--active-color); 
 }
 .meta-zh { 
@@ -105,7 +104,6 @@ nav {
     border-bottom: 1px solid var(--line-color); padding-bottom: 5px; transition: 0.4s ease;
 }
 .channel-name { 
-    /* 補上 Noto Serif TC 作為中文後備，確保中文字也能完美呈現襯線感 */
     font-family: 'Playfair Display', 'Noto Serif TC', serif; font-style: italic; font-size: 1.3rem; color: var(--white); transition: 0.4s ease;
 }
 .tune-action { 
@@ -239,30 +237,70 @@ nav {
 
 .state-message { text-align: center; color: #666; font-size: 0.9rem; padding: 60px 0; letter-spacing: 0.2em; font-family: 'Noto Serif TC', serif; }
 
+/* =========================================================
+   IG Poster (VOGUE Editorial Edition 限動海報)
+   ========================================================= */
 .ig-poster {
-    position: fixed; left: -9999px; width: 1080px; height: 1920px; background: var(--bg-black); color: var(--white); padding: 120px 80px;
-    display: flex; flex-direction: column; justify-content: space-between; font-family: 'Montserrat', 'Noto Serif TC', serif;
+    position: fixed; left: -9999px; width: 1080px; height: 1920px; 
+    background: var(--bg-black); color: var(--white); padding: 60px;
+    display: flex; flex-direction: column; justify-content: center; 
+    font-family: 'Montserrat', 'Noto Serif TC', serif;
 }
-.poster-noise-layer { position: absolute; top:0; left:0; width:100%; height:100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.15; z-index: 0; }
-.poster-frame { height: 100%; border: 3px solid rgba(255,255,255,0.1); padding: 60px; display: flex; flex-direction: column; position: relative; z-index: 1;}
-.poster-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 40px; margin-bottom: 0; flex-shrink: 0; }
-.poster-vol { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--active-color); font-style: italic; }
-.poster-brand { font-size: 1.2rem; letter-spacing: 0.5em; text-transform: uppercase; font-family: 'Montserrat', sans-serif;}
-.poster-body { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 80px; }
-.poster-top-section { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.poster-combo-box { display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 50px; color: #888; font-size: 1.5rem; letter-spacing: 0.2em; width: 100%; font-family: 'Playfair Display', serif; font-style: italic; }
-.poster-combo-cross { color: var(--active-color); font-size: 1.5rem; font-family: sans-serif;}
-.poster-loc { font-size: 5.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 60px; letter-spacing: 0.1em; font-family: 'Noto Serif TC', serif; text-align: center; text-shadow: 0 0 30px rgba(255,255,255,0.1); }
-.poster-divider { width: 80px; height: 2px; background: var(--active-color); margin: 0 auto; }
-.poster-mission { display: flex; flex-direction: column; gap: 60px; padding: 0 20px; }
-.pm-item { margin-bottom: 0; display: flex; align-items: baseline; gap: 20px;}
-.pm-title { display: block; font-size: 1rem; color: #666; letter-spacing: 0.2em; font-family: 'Noto Serif TC', serif; white-space: nowrap; }
-.pm-num { color: var(--active-color); font-family: 'Playfair Display', serif; margin-right: 10px; font-style: italic; font-size: 1.2rem; }
-.pm-desc { font-size: 1.6rem; line-height: 1.6; color: var(--white); font-weight: 300; font-family: 'Noto Serif TC', serif;}
-.poster-footer { border-top: 2px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; flex-shrink: 0; }
-.poster-date { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #888; font-style: italic; }
-.poster-ig { font-size: 1.4rem; letter-spacing: 0.2em; font-family: 'Montserrat', sans-serif;}
+.poster-noise-layer { 
+    position: absolute; top:0; left:0; width:100%; height:100%; 
+    background: url('https://www.transparenttextures.com/patterns/stardust.png'); 
+    opacity: 0.25; z-index: 0; 
+}
+.poster-frame-editorial { 
+    height: 100%; border: 1px solid var(--line-color); 
+    padding: 80px 70px; display: flex; flex-direction: column; 
+    position: relative; z-index: 1;
+}
 
+.poster-header-ed { 
+    display: flex; justify-content: space-between; align-items: flex-end; 
+    border-bottom: 1px solid var(--line-color); padding-bottom: 30px; 
+}
+.poster-brand-ed { font-size: 1.4rem; letter-spacing: 0.4em; color: var(--gray); font-family: 'Montserrat', sans-serif; }
+.poster-vol-ed { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--active-color); font-style: italic; letter-spacing: 0.1em; }
+
+.poster-hero-ed { margin-top: 100px; text-align: left; }
+.poster-loc-ed { 
+    font-family: 'Noto Serif TC', serif; font-size: 7rem; font-weight: 700; 
+    line-height: 1.2; letter-spacing: 0.1em; color: var(--white); margin-bottom: 30px;
+    text-shadow: 0 0 40px rgba(255,255,255,0.05);
+}
+.poster-combo-ed { 
+    font-family: 'Playfair Display', 'Noto Serif TC', serif; font-style: italic; 
+    font-size: 2.5rem; color: var(--active-color); letter-spacing: 0.1em;
+}
+.poster-x-ed { font-family: sans-serif; font-size: 1.8rem; color: #666; margin: 0 25px; font-style: normal; }
+
+.poster-missions-ed { margin-top: auto; margin-bottom: 100px; display: flex; flex-direction: column; gap: 80px; }
+.pm-item-ed { display: flex; gap: 40px; align-items: flex-start; }
+.pm-num-ed { 
+    font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--active-color); 
+    font-style: italic; line-height: 0.8; opacity: 0.4;
+}
+.pm-body-ed { flex: 1; border-bottom: 1px solid var(--line-color); padding-bottom: 50px;}
+.pm-item-ed:last-child .pm-body-ed { border-bottom: none; padding-bottom: 0; }
+
+.pm-title-ed { 
+    display: block; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #888; 
+    letter-spacing: 0.3em; margin-bottom: 25px; text-transform: uppercase; 
+}
+.pm-desc-ed { 
+    font-family: 'Noto Serif TC', serif; font-size: 2rem; line-height: 1.8; color: var(--white); font-weight: 300; 
+}
+
+.poster-footer-ed { 
+    border-top: 1px solid var(--line-color); padding-top: 40px; 
+    display: flex; justify-content: space-between; align-items: baseline; 
+}
+.poster-date-ed { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; color: #777; letter-spacing: 0.3em;}
+.poster-ig-ed { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-style: italic; letter-spacing: 0.1em; color: var(--active-color); }
+
+/* 快門特效與彈窗 */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 .glitch-overlay { 
@@ -295,7 +333,7 @@ nav {
 .close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
 .close-btn:hover, .close-btn:active { color: var(--white); }
 
-/* RWD 手機版優化 */
+/* RWD 手機版優化 (加入橫向滑動與保留頻道區塊底線) */
 @media (max-width: 768px) {
     nav {
         justify-content: flex-start;
