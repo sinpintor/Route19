@@ -45,7 +45,7 @@ nav {
     position: relative;
 }
 
-.nav-link.active, .nav-link:hover { color: var(--white); }
+.nav-link.active, .nav-link:hover, .nav-link:active { color: var(--white); }
 .nav-link.active::after {
     content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
     width: 100%; height: 1px; background: var(--active-color);
@@ -82,7 +82,7 @@ nav {
 .center-align .separator-line { margin-left: auto; margin-right: auto; }
 .center-align .page-desc { margin-left: auto; margin-right: auto; text-align: center; }
 
-/* --- 全新頻道排版 --- */
+/* --- 頻道排版 (加入 :active 支援手機觸控回饋) --- */
 .control-panel { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid var(--line-color); padding-bottom: 20px; }
 .channel-wrapper { 
     display: flex; flex-direction: column; align-items: flex-start; 
@@ -107,9 +107,10 @@ nav {
 .tune-action { 
     font-family: 'Noto Serif TC', serif; font-size: 0.6rem; letter-spacing: 0.15em; color: #555; transition: 0.4s ease;
 }
-.channel-wrapper:hover .channel-display { border-bottom-color: var(--active-color); }
-.channel-wrapper:hover .channel-name { color: var(--active-color); }
-.channel-wrapper:hover .tune-action { color: var(--white); }
+/* 同時支援電腦 hover 與手機 active 點擊 */
+.channel-wrapper:hover .channel-display, .channel-wrapper:active .channel-display { border-bottom-color: var(--active-color); }
+.channel-wrapper:hover .channel-name, .channel-wrapper:active .channel-name { color: var(--active-color); }
+.channel-wrapper:hover .tune-action, .channel-wrapper:active .tune-action { color: var(--white); }
 
 .temp-selector { display: flex; gap: 15px; }
 .temp-btn {
@@ -130,6 +131,7 @@ nav {
 .tag-row-editorial { display: flex; justify-content: center; align-items: center; gap: 15px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--active-color); }
 .tag-x { font-size: 0.8rem; color: #555; }
 
+/* --- 按鈕 (加入 :active 支援手機觸控) --- */
 .action-area { margin-bottom: 50px; text-align: center; }
 .btn-vogue-editorial {
     background: transparent; border: none; cursor: pointer; 
@@ -141,8 +143,8 @@ nav {
     color: var(--white); margin-bottom: 10px; transition: 0.5s; font-weight: 400;
 }
 .btn-line { width: 100%; height: 1px; background: var(--white); transition: 0.5s; transform-origin: center; }
-.btn-vogue-editorial:hover .btn-text { letter-spacing: 0.4em; color: var(--active-color); }
-.btn-vogue-editorial:hover .btn-line { background: var(--active-color); transform: scaleX(1.2); }
+.btn-vogue-editorial:hover .btn-text, .btn-vogue-editorial:active .btn-text { letter-spacing: 0.4em; color: var(--active-color); }
+.btn-vogue-editorial:hover .btn-line, .btn-vogue-editorial:active .btn-line { background: var(--active-color); transform: scaleX(1.2); }
 .btn-primary-editorial .btn-text { color: var(--active-color); }
 .btn-primary-editorial .btn-line { background: var(--active-color); }
 
@@ -150,7 +152,7 @@ nav {
 
 .manual-select-wrapper { text-align: center; margin-top: 25px; }
 .manual-select-text { font-family: 'Noto Serif TC', serif; font-size: 0.65rem; color: #666; cursor: pointer; letter-spacing: 0.2em; transition:0.3s; }
-.manual-select-text:hover { color: var(--white); }
+.manual-select-text:hover, .manual-select-text:active { color: var(--white); }
 .manual-loc-select {
     width: 100%; max-width: 300px; padding: 10px; margin-top: 15px; 
     background: transparent; color: var(--white); text-align: center;
@@ -289,9 +291,9 @@ nav {
 }
 .poster-modal img { width: auto; height: 65vh; max-height: 700px; max-width: 85vw; display: block; object-fit: contain;}
 .close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
-.close-btn:hover { color: var(--white); }
+.close-btn:hover, .close-btn:active { color: var(--white); }
 
-/* RWD 手機版優化 (加入橫向滑動與置中排版) */
+/* RWD 手機版優化 (加入橫向滑動與保留頻道區塊底線) */
 @media (max-width: 768px) {
     nav {
         justify-content: flex-start;
@@ -315,8 +317,7 @@ nav {
     
     .control-panel { flex-direction: column; align-items: center; gap: 25px; text-align: center; }
     .channel-wrapper { align-items: center; text-align: center; }
-    .channel-display { justify-content: center; border-bottom: none; }
-    .btn-text-only { margin-left: 0; margin-top: 10px; display: inline-block; }
+    .channel-display { justify-content: center; } /* 修正：保留了手機版的底線 */
     
     .mission-item-editorial { flex-direction: column; gap: 15px; text-align: center; }
     .m-num { font-size: 2.5rem; }
@@ -325,6 +326,7 @@ nav {
     .about-columns { flex-direction: column; gap: 25px; }
     .emphasis-text { font-size: 1.2rem; }
 
+    /* 手機版 Journal 調整 */
     .journal-card { grid-template-columns: 1fr; gap: 15px; padding: 40px 0; }
     .journal-card::before { left: 0; }
     .j-header { text-align: left; padding-right: 0; padding-left: 20px; }
