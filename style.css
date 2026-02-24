@@ -1,10 +1,10 @@
 :root {
-    --bg-black: #0a0908; /* 更深沉、帶點暖色調的黑 */
-    --bg-paper: #141312; /* 用於卡片或區塊的深灰色 */
-    --active-color: #d4af37; /* 更偏向金屬質感的復古金 */
-    --white: #f0f0eb; /* 像舊雜誌紙張的米白色 */
+    --bg-black: #0a0908;
+    --bg-paper: #141312; 
+    --active-color: #d4af37; 
+    --white: #f0f0eb; 
     --gray: #888888;
-    --line-color: rgba(240, 240, 235, 0.15); /* 極細分隔線顏色 */
+    --line-color: rgba(240, 240, 235, 0.15); 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -17,14 +17,12 @@ body {
     font-weight: 300;
 }
 
-/* VOGUE 級別的 SVG 躁點 */
 .noise-filter {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 9998; opacity: 0.35; 
     pointer-events: none; mix-blend-mode: overlay;
 }
 
-/* 復古暗角效果 */
 .vignette-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 9999; pointer-events: none;
@@ -34,7 +32,6 @@ body {
 nav {
     position: fixed; top: 0; width: 100%; display: flex; justify-content: center;
     padding: 25px 20px; 
-    /* 更強的毛玻璃與極細邊框 */
     background: rgba(10, 9, 8, 0.7);
     backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
@@ -54,7 +51,6 @@ nav {
     width: 100%; height: 1px; background: var(--active-color);
 }
 
-/* 頁面切換動畫：更優雅的上浮 */
 .page { 
     display: none; opacity: 0; transform: translateY(30px); 
     transition: opacity 0.8s ease, transform 1s cubic-bezier(0.2, 1, 0.3, 1); 
@@ -64,7 +60,6 @@ nav {
 
 .content-wrapper { width: 100%; max-width: 700px; margin: 0 auto; padding: 120px 25px 60px; }
 
-/* --- VOGUE Editorial Typography --- */
 .page-header { margin-bottom: 40px; }
 .center-align { text-align: center; }
 
@@ -87,13 +82,34 @@ nav {
 .center-align .separator-line { margin-left: auto; margin-right: auto; }
 .center-align .page-desc { margin-left: auto; margin-right: auto; text-align: center; }
 
-/* --- Control Panel --- */
+/* --- 全新頻道排版 --- */
 .control-panel { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; border-bottom: 1px solid var(--line-color); padding-bottom: 20px; }
-.channel-wrapper { text-align: left; }
-.channel-label { display: block; font-size: 0.6rem; letter-spacing: 0.2em; color: #666; margin-bottom: 5px; }
-.channel-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--white); }
-.btn-text-only { background: none; border: none; color: var(--gray); font-size: 0.6rem; letter-spacing: 0.2em; cursor: pointer; margin-left: 10px; transition: 0.3s; font-family: 'Noto Serif TC', serif;}
-.btn-text-only:hover { color: var(--active-color); }
+.channel-wrapper { 
+    display: flex; flex-direction: column; align-items: flex-start; 
+    cursor: pointer; transition: all 0.4s ease;
+}
+.channel-meta { 
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px; 
+}
+.meta-en { 
+    font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--active-color); 
+}
+.meta-zh { 
+    font-family: 'Noto Serif TC', serif; font-size: 0.65rem; letter-spacing: 0.1em; color: #666; 
+}
+.channel-display { 
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 1px solid var(--line-color); padding-bottom: 5px; transition: 0.4s ease;
+}
+.channel-name { 
+    font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--white); transition: 0.4s ease;
+}
+.tune-action { 
+    font-family: 'Noto Serif TC', serif; font-size: 0.6rem; letter-spacing: 0.15em; color: #555; transition: 0.4s ease;
+}
+.channel-wrapper:hover .channel-display { border-bottom-color: var(--active-color); }
+.channel-wrapper:hover .channel-name { color: var(--active-color); }
+.channel-wrapper:hover .tune-action { color: var(--white); }
 
 .temp-selector { display: flex; gap: 15px; }
 .temp-btn {
@@ -105,7 +121,6 @@ nav {
 .temp-btn.active { color: var(--white); }
 .temp-btn.active::after { width: 100%; }
 
-/* --- Display Stage Editorial --- */
 .display-stage-editorial { margin: 60px 0; text-align: center; }
 .loc-display-large {
     font-family: 'Noto Serif TC', serif; font-size: 3.5rem; font-weight: 700; 
@@ -115,7 +130,6 @@ nav {
 .tag-row-editorial { display: flex; justify-content: center; align-items: center; gap: 15px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--active-color); }
 .tag-x { font-size: 0.8rem; color: #555; }
 
-/* --- Editorial Buttons --- */
 .action-area { margin-bottom: 50px; text-align: center; }
 .btn-vogue-editorial {
     background: transparent; border: none; cursor: pointer; 
@@ -145,7 +159,6 @@ nav {
 }
 .manual-loc-select option { background: var(--bg-black); color: var(--white); }
 
-/* --- Mission Panel Editorial --- */
 .mission-panel-editorial { display: none; margin-top: 60px; animation: fadeIn 1s ease; }
 .mission-item-editorial { 
     display: flex; gap: 30px; margin-bottom: 50px; 
@@ -162,7 +175,6 @@ nav {
 }
 .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: var(--white); font-weight: 300; }
 
-/* --- Passport Editorial --- */
 .progress-container-editorial { margin-bottom: 60px; text-align: center; }
 .progress-bar-bg-thin { width: 100%; height: 1px; background: #333; margin-bottom: 15px; }
 .progress-bar-fill-thin { height: 100%; background: var(--active-color); width: 0%; transition: width 1s ease; }
@@ -180,7 +192,6 @@ nav {
     font-size: 0.75rem; color: rgba(255,255,255,0.3); transition: 0.4s; cursor: default;
     font-family: 'Noto Serif TC', serif; border-radius: 2px;
 }
-/* 墨水暈染效果 */
 .stamp.active { 
     background: var(--active-color); color: var(--bg-black); font-weight: 600; 
     border-color: transparent; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
@@ -191,13 +202,11 @@ nav {
 .record-district { color: #eee; font-family: 'Noto Serif TC', serif; }
 .record-combo { color: #888; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; }
 
-/* --- Journal Editorial --- */
 .journal-list-editorial { border-top: 1px solid var(--line-color); }
 .journal-card { 
     border-bottom: 1px solid var(--line-color); padding: 50px 0; 
     display: grid; grid-template-columns: 1fr 3fr; gap: 30px; position: relative;
 }
-/* 極細垂直時間軸 */
 .journal-card::before {
     content: ''; position: absolute; left: 25%; top: 0; height: 100%; width: 1px; background: var(--line-color);
 }
@@ -211,7 +220,6 @@ nav {
 .j-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
 .j-text { display: block; font-size: 1rem; color: #ccc; line-height: 1.7; font-weight: 300; font-family: 'Noto Serif TC', serif;}
 
-/* --- About Editorial --- */
 .about-section-editorial { margin-bottom: 80px; }
 .emphasis-text { 
     font-family: 'Noto Serif TC', serif; font-size: 1.4rem; color: var(--white); 
@@ -227,7 +235,6 @@ nav {
 
 .state-message { text-align: center; color: #666; font-size: 0.9rem; padding: 60px 0; letter-spacing: 0.2em; font-family: 'Noto Serif TC', serif; }
 
-/* --- IG Poster (維持原樣，但配合新變數) --- */
 .ig-poster {
     position: fixed; left: -9999px; width: 1080px; height: 1920px; background: var(--bg-black); color: var(--white); padding: 120px 80px;
     display: flex; flex-direction: column; justify-content: space-between; font-family: 'Montserrat', 'Noto Serif TC', serif;
@@ -254,7 +261,6 @@ nav {
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-/* 快門漏光特效 */
 .glitch-overlay { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
     background: radial-gradient(circle at 50% 50%, #ffffff 0%, rgba(255,255,255,0) 60%); 
@@ -263,7 +269,6 @@ nav {
 .glitch-active { animation: shutter-flash 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 @keyframes shutter-flash { 0% { opacity: 0; transform: scale(1); } 25% { opacity: 0.5; transform: scale(1.02); } 100% { opacity: 0; transform: scale(1); } }
 
-/* --- New Poster Modal Editorial --- */
 .poster-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(10, 9, 8, 0.97); z-index: 10001;
@@ -283,36 +288,34 @@ nav {
     box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-radius: 4px;
 }
 .poster-modal img { width: auto; height: 65vh; max-height: 700px; max-width: 85vw; display: block; object-fit: contain;}
-.close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif;}
+.close-btn { font-size: 0.8rem; margin-left: 0; font-family: 'Noto Serif TC', serif; cursor: pointer; background: none; border: none; color: #888; transition: 0.3s; letter-spacing: 0.2em;}
+.close-btn:hover { color: var(--white); }
 
-/* RWD 手機版優化 */
+/* RWD 手機版優化 (加入橫向滑動與置中排版) */
 @media (max-width: 768px) {
-    /* --- 新增：手機版導覽列改為橫向滑動 --- */
     nav {
-        justify-content: flex-start; /* 靠左排列，方便滑動 */
-        overflow-x: auto; /* 開啟橫向滑動 */
-        -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更絲滑 */
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         padding-left: 25px; 
         padding-right: 25px;
         gap: 25px;
     }
-    nav::-webkit-scrollbar { 
-        display: none; /* 隱藏醜醜的滾動條 */
-    }
+    nav::-webkit-scrollbar { display: none; }
     .nav-link {
-        white-space: nowrap; /* 絕對不換行 */
-        flex-shrink: 0; /* 防止文字被硬擠壓變形 */
-        font-size: 0.55rem; /* 稍微縮小適應螢幕 */
+        white-space: nowrap;
+        flex-shrink: 0;
+        font-size: 0.55rem;
         letter-spacing: 0.2em;
     }
-    /* ------------------------------------- */
 
     .vogue-title { font-size: 3.2rem; }
     .loc-display-large { font-size: 2.5rem; }
     .tag-row-editorial { font-size: 1rem; }
     
-    .control-panel { flex-direction: column; align-items: center; gap: 25px; }
-    .channel-wrapper { text-align: center; }
+    .control-panel { flex-direction: column; align-items: center; gap: 25px; text-align: center; }
+    .channel-wrapper { align-items: center; text-align: center; }
+    .channel-display { justify-content: center; border-bottom: none; }
     .btn-text-only { margin-left: 0; margin-top: 10px; display: inline-block; }
     
     .mission-item-editorial { flex-direction: column; gap: 15px; text-align: center; }
@@ -322,7 +325,6 @@ nav {
     .about-columns { flex-direction: column; gap: 25px; }
     .emphasis-text { font-size: 1.2rem; }
 
-    /* 手機版 Journal 調整 */
     .journal-card { grid-template-columns: 1fr; gap: 15px; padding: 40px 0; }
     .journal-card::before { left: 0; }
     .j-header { text-align: left; padding-right: 0; padding-left: 20px; }
