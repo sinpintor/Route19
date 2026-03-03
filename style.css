@@ -185,7 +185,7 @@ nav {
 }
 .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: var(--white); font-weight: 300; }
 
-/* --- Passport Editorial (矩陣網格目錄) --- */
+/* --- Passport Editorial --- */
 .progress-container-editorial { margin-bottom: 60px; text-align: center; }
 .progress-bar-bg-thin { width: 100%; height: 1px; background: #333; margin-bottom: 15px; }
 .progress-bar-fill-thin { height: 100%; background: var(--active-color); width: 0%; transition: width 1s ease; }
@@ -234,28 +234,33 @@ nav {
 .j-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
 .j-text { display: block; font-size: 1rem; color: #ccc; line-height: 1.7; font-weight: 300; font-family: 'Noto Serif TC', serif;}
 
-/* --- Editorial Note (清爽內文與獨立版權頁 Colophon) --- */
-.editorial-article-clean { margin-bottom: 60px; }
+/* --- Editorial Note (紀事內文與極簡版權) --- */
+.editorial-article-clean { margin-bottom: 80px; }
 .editorial-article-clean p { 
     font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 2.2; 
     color: #ccc; text-align: justify; margin-bottom: 25px; letter-spacing: 0.08em;
 }
 
-/* 雜誌最經典的版權宣告三連星 */
-.editorial-colophon { 
-    display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid var(--line-color); 
-    border-bottom: 1px solid var(--line-color); 
-    padding: 40px 0; margin-top: 40px;
+/* 改為單純的文字置中排版，確保 100% 對稱置中 */
+.editorial-footer-minimal { 
+    margin-top: 80px; 
+    padding-top: 40px; 
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+    text-align: center; /* 強制內容絕對置中 */
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 0.6rem; 
+    letter-spacing: 0.4em; 
+    color: #555; 
+    width: 100%;
+    display: block; 
 }
-.colophon-item { display: flex; flex-direction: column; gap: 8px; }
-.c-label { 
-    font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: #666; 
-    letter-spacing: 0.3em; text-transform: uppercase; 
+.editorial-footer-minimal span {
+    display: inline-block; /* 讓版權文字變成行內區塊，方便手機堆疊 */
 }
-.c-val { 
-    font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--active-color); 
-    font-style: italic; letter-spacing: 0.1em; 
+.editorial-footer-minimal .divider {
+    margin: 0 20px;
+    color: #333;
+    font-weight: 300;
 }
 
 .state-message { text-align: center; color: #666; font-size: 0.9rem; padding: 60px 0; letter-spacing: 0.2em; font-family: 'Noto Serif TC', serif; }
@@ -425,7 +430,8 @@ nav {
     .stamp { font-size: 0.8rem; }
     .stamp-county-title { text-align: center; }
 
-    /* 手機版 Colophon 版權頁改為上下堆疊，氣勢更強 */
-    .editorial-colophon { flex-direction: column; gap: 40px; text-align: center; padding: 40px 0; }
-    .colophon-item { align-items: center; }
+    /* 手機版版權：變成純粹的上下置中文字堆疊 */
+    .editorial-footer-minimal span { display: block; margin-bottom: 12px; }
+    .editorial-footer-minimal span:last-child { margin-bottom: 0; }
+    .editorial-footer-minimal .divider { display: none; } 
 }
